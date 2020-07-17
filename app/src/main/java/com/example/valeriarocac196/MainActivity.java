@@ -2,17 +2,24 @@ package com.example.valeriarocac196;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
     DBHelper myHelper;
     private static final String TAG = "MainActivity";
-    private static ArrayList<Term> allTerms;
+    static ArrayList<Term> allTerms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, myHelper.getDatabaseName(), Toast.LENGTH_SHORT).show();
         //create Term table
         myHelper.createTable("term_table");
+
+        Button allTermsBtn = findViewById(R.id.allTermsButton);
+        allTermsBtn.setOnClickListener((view) -> {
+            Intent intent = new Intent(MainActivity.this, TermListActivity.class);
+            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+        });
 
     }
 
