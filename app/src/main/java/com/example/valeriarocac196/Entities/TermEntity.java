@@ -1,20 +1,20 @@
-package com.example.valeriarocac196;
+package com.example.valeriarocac196.Entities;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Term {
-    private long termId;
+import java.util.Date;
+
+@Entity(tableName = "term_table")
+public class TermEntity {
+    @PrimaryKey
+    private int termId;
     private String title;
     private String startDate;
     private String endDate;
-    private int current;
+    private boolean current;
 
-    public Term() {
-        this.title = "";
-        this.startDate = "";
-        this.endDate = "";
-        this.current = 0;
-    }
-
-    public Term(long termId, String title, String startDate, String endDate, int current) {
+    public TermEntity(int termId, String title, String startDate, String endDate, boolean current) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -22,11 +22,11 @@ public class Term {
         this.current = current;
     }
 
-    public long getTermId() {
+    public int getTermId() {
         return termId;
     }
 
-    public void setTermId(long termId) {
+    public void setTermId(int termId) {
         this.termId = termId;
     }
 
@@ -54,13 +54,11 @@ public class Term {
         this.endDate = endDate;
     }
 
-    public int getCurrent() {
+    public boolean isCurrent() {
         return current;
     }
 
-    public void setCurrent(int current) {
+    public void setCurrent(boolean current) {
         this.current = current;
     }
-
 }
-

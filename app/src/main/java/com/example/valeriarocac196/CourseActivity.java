@@ -1,4 +1,4 @@
 package com.example.valeriarocac196;
 
-public class DBDataManager {
+public class CourseActivity {
 }
