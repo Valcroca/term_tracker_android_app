@@ -40,6 +40,14 @@ public class CourseEntity {
         this.courseAlertDate = courseAlertDate;
     }
 
+    public CourseEntity(int i, int courseTermId, String courseName, String courseStart, String courseEnd) {
+        this.courseId = courseId;
+        this.courseTermId = courseTermId;
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public int getCourseId() {
         return courseId;
     }

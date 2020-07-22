@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.CursorAdapter;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TermListActivity extends AppCompatActivity {
+public class TermActivity extends AppCompatActivity {
     private TermViewModel mTermViewModel;
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
@@ -40,8 +41,22 @@ public class TermListActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        RecyclerView rv = findViewById(R.id.termsListRecyclerView);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TermActivity.this, CourseActivity.class);
+                intent.putExtra("termId",mTermViewModel.lastID()+1);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+            }
+        });
+
+        RecyclerView rv = findViewById(R.id.recyclerview);
         final TermAdapter adapter = new TermAdapter(this);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -53,12 +68,6 @@ public class TermListActivity extends AppCompatActivity {
                 // Update the cached copy of the words in the adapter.
                 adapter.setTerms(terms);
             }
-        });
-
-        FloatingActionButton homeBtn = findViewById(R.id.homeButton);
-        homeBtn.setOnClickListener((view) -> {
-            Intent intent = new Intent(TermListActivity.this, MainActivity.class);
-            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
 
     }

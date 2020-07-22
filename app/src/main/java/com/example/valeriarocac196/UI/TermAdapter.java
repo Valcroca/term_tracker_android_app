@@ -20,10 +20,9 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
     class TermViewHolder extends RecyclerView.ViewHolder {
         private final TextView termItemView;
 
-
         private TermViewHolder(View itemView) {
             super(itemView);
-            termItemView = itemView.findViewById(R.id.termName);
+            termItemView = itemView.findViewById(R.id.termTextView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -31,8 +30,8 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                     final TermEntity current = mTerms.get(position);
                     Intent intent = new Intent(context, CourseActivity.class);
                     intent.putExtra("termName", current.getTitle());
-                    intent.putExtra("termStart", (current.getStartDate()).toString());
-                    intent.putExtra("termEnd",(current.getEndDate()).toString());
+                    intent.putExtra("termStart", current.getStartDate());
+                    intent.putExtra("termEnd",current.getEndDate());
                     intent.putExtra("position",position);
                     context.startActivity(intent);
                 }
@@ -63,7 +62,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         } else {
             // Covers the case of data not being ready yet.
-            holder.termItemView.setText("No Terms yet!");
+            holder.termItemView.setText("No Terms");
         }
     }
 

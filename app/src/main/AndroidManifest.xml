@@ -10,8 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".TermListActivity"
-            android:label="@string/title_activity_term_list"
+            android:name=".TermActivity"
+            android:label="List Of Terms"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".CourseActivity"
+            android:label="Term Info"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity

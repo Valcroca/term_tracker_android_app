@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
@@ -20,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button allTermsBtn = findViewById(R.id.allTermsButton);
         allTermsBtn.setOnClickListener((view) -> {
-            Intent intent = new Intent(MainActivity.this, TermListActivity.class);
+            Intent intent = new Intent(MainActivity.this, TermActivity.class);
             startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
 
