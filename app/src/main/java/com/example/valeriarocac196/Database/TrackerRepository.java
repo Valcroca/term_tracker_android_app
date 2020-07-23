@@ -3,7 +3,6 @@ package com.example.valeriarocac196.Database;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.example.valeriarocac196.DAO.AssessmentDAO;
@@ -59,7 +58,7 @@ public class TrackerRepository {
 
         @Override
         protected Void doInBackground(final TermEntity... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertTerm(params[0]);
             return null;
         }
     }

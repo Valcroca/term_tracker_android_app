@@ -15,11 +15,11 @@
         android:text="Term Title"
         tools:layout_editor_absoluteX="204dp"
         tools:layout_editor_absoluteY="53dp"
-        app:layout_constraintBottom_toBottomOf="@id/editTitle"
+        app:layout_constraintBottom_toBottomOf="@id/editTermTitle"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editTitle"
+        android:id="@+id/editTermTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Title"
@@ -35,18 +35,18 @@
         android:text="Start Date"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="112dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editStart"
+        app:layout_constraintBottom_toBottomOf="@+id/editTermStart"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editStart"
+        android:id="@+id/editTermStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
         app:layout_constraintLeft_toRightOf="@+id/termStart"
-        app:layout_constraintTop_toBottomOf="@id/editTitle"/>
+        app:layout_constraintTop_toBottomOf="@id/editTermTitle"/>
 
     <TextView
         android:id="@+id/termEnd"
@@ -55,18 +55,18 @@
         android:text="End Date"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="112dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/editTermEnd"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editEnd"
+        android:id="@+id/editTermEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
         app:layout_constraintLeft_toRightOf="@+id/termEnd"
-        app:layout_constraintTop_toBottomOf="@id/editStart"/>
+        app:layout_constraintTop_toBottomOf="@id/editTermStart"/>
 
     <Button
         android:id="@+id/button_save"
@@ -75,7 +75,7 @@
         android:background="@color/colorPrimary"
 
         android:text="Save"
-        app:layout_constraintTop_toBottomOf="@+id/editEnd"
+        app:layout_constraintTop_toBottomOf="@+id/editTermEnd"
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -3,10 +3,15 @@ package com.example.valeriarocac196.Database;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.valeriarocac196.DAO.AssessmentDAO;
@@ -16,7 +21,8 @@ import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 1)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 4, exportSchema = false)
+@TypeConverters(DateConverter.class)
 
 public abstract class TrackerManagementDatabase extends RoomDatabase {
     public abstract TermDAO termDAO();
@@ -74,11 +80,14 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
             mTermDAO.deleteAllTerms();
             mCourseDAO.deleteAllCourses();
             mAssessmentDAO.deleteAllAssessments();
+
             //create terms
-            TermEntity term= new TermEntity(1, "1st Term", null, null, false);
-            mTermDAO.insert(term);
-            term=new TermEntity(2, "2nd Term", null, null, false);
-            mTermDAO.insert(term);
+            TermEntity term= new TermEntity(1, "First Term", DateConverter.toDate("01/01/2020"), DateConverter.toDate("06/30/2020"), false);
+            mTermDAO.insertTerm(term);
+            term=new TermEntity(2, "Second Term", DateConverter.toDate("07/01/2020"), DateConverter.toDate("12/31/2020"), true);
+            mTermDAO.insertTerm(term);
+            term=new TermEntity(3, "Third Term", DateConverter.toDate("01/01/2021"), DateConverter.toDate("06/30/2021"), false);
+            mTermDAO.insertTerm(term);
             //create courses
             CourseEntity course = new CourseEntity(1, 1, "First Course", null, null, "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
             mCourseDAO.insert(course);

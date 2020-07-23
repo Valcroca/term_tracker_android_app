@@ -1,5 +1,4 @@
 package com.example.valeriarocac196.Entities;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,16 +9,26 @@ public class TermEntity {
     @PrimaryKey
     private int termId;
     private String title;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
     private boolean current;
 
-    public TermEntity(int termId, String title, String startDate, String endDate, boolean current) {
+    public TermEntity(int termId, String title, Date startDate, Date endDate, boolean current) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
         this.endDate = endDate;
         this.current = current;
+    }
+
+    @Override
+    public String toString() {
+        return "TermEntity{" +
+                "termId=" + termId +
+                ", termTitle='" + title + '\'' +
+                ", termStart=" + startDate + '\'' +
+                ", termEnd=" + endDate +
+                '}';
     }
 
     public int getTermId() {
@@ -38,19 +47,19 @@ public class TermEntity {
         this.title = title;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

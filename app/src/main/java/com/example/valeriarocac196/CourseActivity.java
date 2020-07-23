@@ -27,9 +27,9 @@ public class CourseActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private TermViewModel mTermViewModel;
     private CourseViewModel mCourseViewModel;
-    private EditText mEditTitle;
-    private EditText mEditStart;
-    private EditText mEditEnd;
+    private EditText mEditTermTitle;
+    private EditText mEditTermStart;
+    private EditText mEditTermEnd;
     private int position;
 
     @Override
@@ -42,13 +42,13 @@ public class CourseActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        mEditTitle= findViewById(R.id.editTitle);
-        mEditStart= findViewById(R.id.editStart);
-        mEditEnd= findViewById(R.id.editEnd);
+        mEditTermTitle = findViewById(R.id.editTermTitle);
+        mEditTermStart = findViewById(R.id.editTermStart);
+        mEditTermEnd = findViewById(R.id.editTermEnd);
         if(getIntent().getStringExtra("termTitle")!=null) {
-            mEditTitle.setText(getIntent().getStringExtra("termTitle"));
-            mEditStart.setText(getIntent().getStringExtra("termStart"));
-            mEditEnd.setText(getIntent().getStringExtra("termEnd"));
+            mEditTermTitle.setText(getIntent().getStringExtra("termTitle"));
+            mEditTermStart.setText(getIntent().getStringExtra("termStart"));
+            mEditTermEnd.setText(getIntent().getStringExtra("termEnd"));
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -80,18 +80,18 @@ public class CourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
-                String title = mEditTitle.getText().toString();
-                String start = mEditStart.getText().toString();
-                String end = mEditEnd.getText().toString();
+                String title = mEditTermTitle.getText().toString();
+                String start = mEditTermStart.getText().toString();
+                String end = mEditTermEnd.getText().toString();
 
                 replyIntent.putExtra("termTitle", title);
                 replyIntent.putExtra("termStart", start);
                 replyIntent.putExtra("termEnd", end);
-                if(getIntent().getStringExtra("termTitle")!=null) {
-                    int id=getIntent().getIntExtra("termId",0);
-                    TermEntity term = new TermEntity(id, title, start, end, false);
-                    mTermViewModel.insert(term);
-                }
+//                if(getIntent().getStringExtra("termTitle")!=null) {
+//                    int id=getIntent().getIntExtra("termId",0);
+//                    TermEntity term = new TermEntity(id, title, start, end, false);
+//                    mTermViewModel.insert(term);
+//                }
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.valeriarocac196.CourseActivity;
+import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Entities.TermEntity;
 import com.example.valeriarocac196.R;
 
@@ -18,11 +19,15 @@ import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
     class TermViewHolder extends RecyclerView.ViewHolder {
-        private final TextView termItemView;
+        private final TextView termTitleItemView;
+        private final TextView termStartItemView;
+        private final TextView termEndItemView;
 
         private TermViewHolder(View itemView) {
             super(itemView);
-            termItemView = itemView.findViewById(R.id.termTextView);
+            termTitleItemView = itemView.findViewById(R.id.termTitleTextView);
+            termStartItemView = itemView.findViewById(R.id.termStartTextView);
+            termEndItemView = itemView.findViewById(R.id.termEndTextView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,11 +63,13 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         if (mTerms != null) {
             final TermEntity current = mTerms.get(position);
-            holder.termItemView.setText(current.getTitle());
+            holder.termTitleItemView.setText(current.getTitle());
+            holder.termStartItemView.setText("Start: " + DateConverter.formatDateString(current.getStartDate().toString()));
+            holder.termEndItemView.setText("End: " + DateConverter.formatDateString(current.getEndDate().toString()));
 
         } else {
             // Covers the case of data not being ready yet.
-            holder.termItemView.setText("No Terms");
+            holder.termTitleItemView.setText("No Terms");
         }
     }
 

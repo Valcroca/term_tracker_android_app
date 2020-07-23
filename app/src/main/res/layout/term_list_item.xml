@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -7,10 +8,29 @@
 
     <TextView
         android:paddingLeft="10dp"
-        android:id="@+id/termTextView"
+        android:id="@+id/termTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/holo_orange_light"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+    <TextView
+        android:id="@+id/termStartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/termEndTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_orange_light"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000" />
 </LinearLayout>
