@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".TermEditActivity"
+            android:name=".EditTermActivity"
             android:label="Term Info"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

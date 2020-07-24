@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.valeriarocac196.AddCourseActivity;
+import com.example.valeriarocac196.Database.DateConverter;
+import com.example.valeriarocac196.EditCourseActivity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.R;
 
@@ -19,26 +21,29 @@ import java.util.List;
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
 
     class CourseViewHolder extends RecyclerView.ViewHolder {
-        private final TextView courseItemView;
-        private final TextView courseItemView2;
+        private final TextView courseNameItemView;
+        private final TextView courseStartItemView;
+        private final TextView courseEndItemView;
 
 
         private CourseViewHolder(View itemView) {
             super(itemView);
-            courseItemView = itemView.findViewById(R.id.courseTextView);
-            courseItemView2 = itemView.findViewById(R.id.courseTextView2);
+            courseNameItemView = itemView.findViewById(R.id.courseNameTextView);
+            courseStartItemView = itemView.findViewById(R.id.courseStartTextView);
+            courseEndItemView = itemView.findViewById(R.id.courseEndTextView);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     final CourseEntity current = mCourses.get(position);
-                    Intent intent = new Intent(context, AddCourseActivity.class);
+                    Intent intent = new Intent(context, EditCourseActivity.class);
+                    intent.putExtra("courseId", current.getCourseId());
                     intent.putExtra("courseName", current.getName());
                     intent.putExtra("courseStart", current.getStartDate());
                     intent.putExtra("courseEnd", current.getEndDate());
                     intent.putExtra("position", position);
-                    intent.putExtra("courseId", current.getCourseId());
-                    intent.putExtra("termId", current.getCourseTermId());
+                    intent.putExtra("courseTermId", current.getCourseTermId());
                     context.startActivity(intent);
                 }
             });
@@ -50,8 +55,8 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     private List<CourseEntity> mCourses;
 
     public CourseAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
-        this.context=context;
+        this.mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @NonNull
@@ -65,12 +70,13 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     public void onBindViewHolder(CourseViewHolder holder, int position) {
         if (mCourses != null) {
             CourseEntity current = mCourses.get(position);
-            holder.courseItemView.setText(current.getName());
-            holder.courseItemView2.setText(Integer.toString(current.getCourseTermId()));
+            holder.courseNameItemView.setText(current.getName());
+            holder.courseStartItemView.setText("Start: " + DateConverter.formatDateString(current.getStartDate().toString()));
+            holder.courseEndItemView.setText("End: " + DateConverter.formatDateString(current.getEndDate().toString()));
         } else {
             // Covers the case of data not being ready yet.
-            holder.courseItemView.setText("No Courses");
-            holder.courseItemView2.setText("No Courses");
+            holder.courseNameItemView.setText("No Courses");
+
         }
     }
 

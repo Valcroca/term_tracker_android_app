@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import com.example.valeriarocac196.Database.TrackerRepository;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
-import com.example.valeriarocac196.TermEditActivity;
 
 import java.util.List;
 

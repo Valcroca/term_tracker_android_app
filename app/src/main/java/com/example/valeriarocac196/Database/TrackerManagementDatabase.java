@@ -21,7 +21,7 @@ import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 4, exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 5, exportSchema = false)
 @TypeConverters(DateConverter.class)
 
 public abstract class TrackerManagementDatabase extends RoomDatabase {
@@ -89,13 +89,13 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
             term=new TermEntity(3, "Third Term", DateConverter.toDate("01/01/2021"), DateConverter.toDate("06/30/2021"), false);
             mTermDAO.insertTerm(term);
             //create courses
-            CourseEntity course = new CourseEntity(1, 1, "First Course", null, null, "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            CourseEntity course = new CourseEntity(1, 1, "First Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
             mCourseDAO.insert(course);
-            course=new CourseEntity(2, 1, "Second Course", null, null, "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            course=new CourseEntity(2, 1, "Second Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
             mCourseDAO.insert(course);
-            course=new CourseEntity(3, 2, "Third Course", null, null, "status", "Mable Nice", "801-333-6655", "mabel@gmail.com","notes", null);
+            course=new CourseEntity(3, 2, "Third Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com","notes", null);
             mCourseDAO.insert(course);
-            course=new CourseEntity(4, 2, "Fourth Course", null, null, "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            course=new CourseEntity(4, 2, "Fourth Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
             mCourseDAO.insert(course);
             //create assessments
             AssessmentEntity assessment = new AssessmentEntity(1,1,"Mid-term Test", "info", "One day prior", "status", null, null);

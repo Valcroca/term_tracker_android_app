@@ -1,6 +1,5 @@
 package com.example.valeriarocac196.Entities;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -24,9 +23,11 @@ public class CourseEntity {
     private int courseId;
     private int courseTermId;
     private String name, status, mentorName, mentorPhone, mentorEmail, notes;
-    private String startDate, endDate, courseAlertDate;
+    private Date startDate;
+    private Date endDate;
+    private Date courseAlertDate;
 
-    public CourseEntity(int courseId, int courseTermId, String name, String startDate, String endDate, String status, String mentorName, String mentorPhone, String mentorEmail, String notes, String courseAlertDate) {
+    public CourseEntity(int courseId, int courseTermId, String name, Date startDate, Date endDate, String status, String mentorName, String mentorPhone, String mentorEmail, String notes, Date courseAlertDate) {
         this.courseId = courseId;
         this.courseTermId = courseTermId;
         this.name = name;
@@ -40,7 +41,7 @@ public class CourseEntity {
         this.courseAlertDate = courseAlertDate;
     }
 
-    public CourseEntity(int i, int courseTermId, String courseName, String courseStart, String courseEnd) {
+    public CourseEntity(int i, int courseTermId, String courseName, Date courseStart, Date courseEnd) {
         this.courseId = courseId;
         this.courseTermId = courseTermId;
         this.name = name;
@@ -112,27 +113,27 @@ public class CourseEntity {
         this.notes = notes;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public String getCourseAlertDate() {
+    public Date getCourseAlertDate() {
         return courseAlertDate;
     }
 
-    public void setCourseAlertDate(String courseAlertDate) {
+    public void setCourseAlertDate(Date courseAlertDate) {
         this.courseAlertDate = courseAlertDate;
     }
 }

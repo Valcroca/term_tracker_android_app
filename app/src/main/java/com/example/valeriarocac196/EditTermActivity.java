@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -29,7 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class TermEditActivity extends AppCompatActivity {
+public class EditTermActivity extends AppCompatActivity {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private CourseViewModel mCourseViewModel;
 
@@ -86,7 +87,7 @@ public class TermEditActivity extends AppCompatActivity {
             DateConverter.updateDateText(mEditTermStart, calendar);
         };
         mEditTermStart = findViewById(R.id.editTermStart);
-        mEditTermStart.setOnClickListener(v -> new DatePickerDialog(TermEditActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditTermStart.setOnClickListener(v -> new DatePickerDialog(EditTermActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
@@ -109,7 +110,7 @@ public class TermEditActivity extends AppCompatActivity {
             DateConverter.updateDateText(mEditTermStart, calendar);
         };
         mEditTermEnd = findViewById(R.id.editTermEnd);
-        mEditTermEnd.setOnClickListener(v -> new DatePickerDialog(TermEditActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditTermEnd.setOnClickListener(v -> new DatePickerDialog(EditTermActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
@@ -130,23 +131,28 @@ public class TermEditActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TermEditActivity.this, AddCourseActivity.class);
+                Intent intent = new Intent(EditTermActivity.this, AddCourseActivity.class);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.associated_courses);
-        final CourseAdapter adapter = new CourseAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //term's courses recycler view
+        RecyclerView coursesRecyclerView = findViewById(R.id.associated_courses);
+        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        coursesRecyclerView.setAdapter(courseAdapter);
+        coursesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
-            public void onChanged(List<CourseEntity> courses) {
+            public void onChanged(@Nullable final List<CourseEntity> courses) {
                 List<CourseEntity> filteredCourses=new ArrayList<>();
-                for(CourseEntity c:courses)if(c.getCourseId()==getIntent().getIntExtra("courseId",0))courses.add(c);
-                adapter.setCourses(filteredCourses);
+                for(CourseEntity c:courses) {
+                    if (c.getCourseTermId() == getIntent().getIntExtra("termId", 0)) {
+                        filteredCourses.add(c);
+                    }
+                }
+                courseAdapter.setCourses(filteredCourses);
             }
         });
 
@@ -185,7 +191,7 @@ public class TermEditActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), data.getStringExtra("courseStart"),  data.getStringExtra("courseEnd"));
+            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseEnd")));
             mCourseViewModel.insert(course);
         }
     }

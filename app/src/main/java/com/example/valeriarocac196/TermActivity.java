@@ -46,12 +46,12 @@ public class TermActivity extends AppCompatActivity {
             }
         });
 
+        //term list recycler view
         RecyclerView rv = findViewById(R.id.recyclerview);
         final TermAdapter adapter = new TermAdapter(this);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
-
         mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
             @Override
             public void onChanged(@Nullable final List<TermEntity> terms) {

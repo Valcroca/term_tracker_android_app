@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.valeriarocac196.TermEditActivity;
+import com.example.valeriarocac196.EditTermActivity;
 import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Entities.TermEntity;
 import com.example.valeriarocac196.R;
@@ -32,7 +32,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     final TermEntity current = mTerms.get(position);
-                    Intent intent = new Intent(context, TermEditActivity.class);
+                    Intent intent = new Intent(context, EditTermActivity.class);
                     intent.putExtra("termId", current.getTermId());
                     intent.putExtra("termTitle", current.getTitle());
                     intent.putExtra("termStart", DateConverter.formatDateString(current.getStartDate().toString()));
