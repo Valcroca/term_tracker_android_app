@@ -2,26 +2,17 @@ package com.example.valeriarocac196.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.valeriarocac196.CourseActivity;
-import com.example.valeriarocac196.CourseDetail;
+import com.example.valeriarocac196.AddCourseActivity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.R;
-import com.example.valeriarocac196.ViewModel.CourseViewModel;
-import com.example.valeriarocac196.ViewModel.TermViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -41,7 +32,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     final CourseEntity current = mCourses.get(position);
-                    Intent intent = new Intent(context, CourseDetail.class);
+                    Intent intent = new Intent(context, AddCourseActivity.class);
                     intent.putExtra("courseName", current.getName());
                     intent.putExtra("courseStart", current.getStartDate());
                     intent.putExtra("courseEnd", current.getEndDate());

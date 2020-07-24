@@ -1,7 +1,6 @@
 package com.example.valeriarocac196;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import com.example.valeriarocac196.Entities.TermEntity;
@@ -9,25 +8,16 @@ import com.example.valeriarocac196.UI.TermAdapter;
 import com.example.valeriarocac196.ViewModel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.CursorAdapter;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TermActivity extends AppCompatActivity {
@@ -50,7 +40,7 @@ public class TermActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TermActivity.this, CourseActivity.class);
+                Intent intent = new Intent(TermActivity.this, AddTermActivity.class);
                 intent.putExtra("termId",mTermViewModel.lastID()+1);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }

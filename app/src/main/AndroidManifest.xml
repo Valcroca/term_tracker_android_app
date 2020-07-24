@@ -15,7 +15,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".CourseActivity"
+            android:name=".TermEditActivity"
             android:label="Term Info"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

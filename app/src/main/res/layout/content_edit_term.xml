@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CourseActivity"
-    tools:showIn="@layout/activity_course">
+    tools:context=".TermEditActivity"
+    tools:showIn="@layout/activity_edit_term">
 
     <TextView
         android:id="@+id/termTitle"
@@ -42,7 +42,7 @@
         android:id="@+id/editTermStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
         app:layout_constraintLeft_toRightOf="@+id/termStart"
@@ -62,8 +62,7 @@
         android:id="@+id/editTermEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        tools:layout_editor_absoluteX="210dp"
+        android:focusableInTouchMode="false"        tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
         app:layout_constraintLeft_toRightOf="@+id/termEnd"
         app:layout_constraintTop_toBottomOf="@id/editTermStart"/>

@@ -44,6 +44,7 @@ public class TrackerRepository {
     public LiveData<List<AssessmentEntity>> getAllAssessments() { return mAllAssessments; };
     public LiveData<List<AssessmentEntity>> getAllAssociatedAssessments(int courseId) { return mAllAssociatedAssessments; }
 
+    //term methods
     public void insert (TermEntity termEntity) {
         new insertAsyncTask(mTermDAO).execute(termEntity);
     }
@@ -63,6 +64,26 @@ public class TrackerRepository {
         }
     }
 
+    public void updateTerm(TermEntity term) {
+        new updateAsyncTask(mTermDAO).execute(term);
+    }
+
+    private static class updateAsyncTask extends AsyncTask<TermEntity, Void, Void> {
+
+        private TermDAO mAsyncTaskDao;
+
+        updateAsyncTask(TermDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final TermEntity... params) {
+            mAsyncTaskDao.updateTerm(params[0]);
+            return null;
+        }
+    }
+
+    //course methods
     public void insert (CourseEntity courseEntity) {
         new insertAsyncTask1(mCourseDAO).execute(courseEntity);
     }
@@ -82,6 +103,7 @@ public class TrackerRepository {
         }
     }
 
+    //assessment methods
     public void insert(AssessmentEntity assessmentEntity) {
         new insertAsyncTask2(mAssessmentDAO).execute(assessmentEntity);
     }
