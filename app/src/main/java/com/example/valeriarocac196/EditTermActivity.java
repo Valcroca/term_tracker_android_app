@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +48,7 @@ public class EditTermActivity extends AppCompatActivity {
     private EditText mEditTermStart;
     private EditText mEditTermEnd;
     private int position;
+    List<CourseEntity> filteredCourses = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +68,11 @@ public class EditTermActivity extends AppCompatActivity {
 
         Date termStart;
         Date termEnd;
-        int termId;
+        final int[] termId = new int[1];
 
-        if(getIntent().getStringExtra("termTitle")!=null) {
+        if (getIntent().getStringExtra("termTitle") != null) {
             //setting term data, passed from adapter, on edit fields
-            termId = getIntent().getExtras().getInt("termId");
+            termId[0] = getIntent().getExtras().getInt("termId");
             mEditTermTitle.setText(getIntent().getStringExtra("termTitle"));
             String startString = getIntent().getStringExtra("termStart");
             mEditTermStart.setText(startString);
@@ -146,8 +149,7 @@ public class EditTermActivity extends AppCompatActivity {
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable final List<CourseEntity> courses) {
-                List<CourseEntity> filteredCourses=new ArrayList<>();
-                for(CourseEntity c:courses) {
+                for (CourseEntity c : courses) {
                     if (c.getCourseTermId() == getIntent().getIntExtra("termId", 0)) {
                         filteredCourses.add(c);
                     }
@@ -157,7 +159,7 @@ public class EditTermActivity extends AppCompatActivity {
         });
 
         //save edited term button
-        final Button button=findViewById(R.id.button_save);
+        final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,10 +171,35 @@ public class EditTermActivity extends AppCompatActivity {
                 replyIntent.putExtra("termTitle", title);
                 replyIntent.putExtra("termStart", start);
                 replyIntent.putExtra("termEnd", end);
-                if(getIntent().getStringExtra("termTitle")!=null) {
-                    int id=getIntent().getIntExtra("termId",0);
+                if (getIntent().getStringExtra("termTitle") != null) {
+                    int id = getIntent().getIntExtra("termId", 0);
                     TermEntity updatedTerm = new TermEntity(id, title, DateConverter.toDate(start), DateConverter.toDate(end), false);
                     mTermViewModel.updateTerm(updatedTerm);
+                }
+                setResult(RESULT_OK, replyIntent);
+                finish();
+            }
+
+        });
+
+
+        //delete term button
+        final Button deleteButton = findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent replyIntent = new Intent();
+                termId[0] = getIntent().getExtras().getInt("termId");
+                String title = mEditTermTitle.getText().toString();
+                String start = mEditTermStart.getText().toString();
+                String end = mEditTermEnd.getText().toString();
+                if (filteredCourses.isEmpty()) {
+                    TermEntity deletingTerm = new TermEntity(termId[0], title, DateConverter.toDate(start), DateConverter.toDate(end), false );
+                    mTermViewModel.deleteTerm(deletingTerm);
+
+                    Toast.makeText(getApplicationContext(), title + " Was Deleted!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), title + " Has Courses! It Cannot Be Deleted.", Toast.LENGTH_LONG).show();
                 }
                 setResult(RESULT_OK, replyIntent);
                 finish();

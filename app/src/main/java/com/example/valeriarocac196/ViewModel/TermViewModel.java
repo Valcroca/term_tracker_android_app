@@ -32,15 +32,21 @@ public class TermViewModel extends AndroidViewModel {
         return mAllTerms;
     }
 
+//    public TermEntity getTerm(int termId) {
+//        TermEntity termFound = mRepository.getTermById(termId);
+//        return termFound;
+//    }
+
     public void insertTerm(TermEntity termEntity){
         mRepository.insertTerm(termEntity);
     }
 
-    public void updateTerm(TermEntity termEntity) {
-        mRepository.updateTerm(termEntity);
-    }
+    public void updateTerm(TermEntity termEntity) { mRepository.updateTerm(termEntity); }
+
+    public void deleteTerm(TermEntity termEntity) { mRepository.deleteTerm(termEntity); }
 
     public int lastID(){
         return mAllTerms.getValue().size();
     }
+
 }

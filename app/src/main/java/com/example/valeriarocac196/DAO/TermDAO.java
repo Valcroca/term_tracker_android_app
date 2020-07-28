@@ -24,7 +24,7 @@ public interface TermDAO {
     void deleteTerm(TermEntity term);
 
     @Query("SELECT * FROM term_table WHERE termId = :id")
-    TermEntity getTermById(int id);
+    LiveData<List<TermEntity>> getTermById(int id);
 
     @Query("DELETE FROM term_table")
     void deleteAllTerms();
