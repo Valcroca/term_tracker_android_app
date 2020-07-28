@@ -20,6 +20,11 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
+            android:name=".AddTermActivity"
+            android:label="New Term"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
             android:name=".CurrentTermActivity"
             android:label="@string/title_activity_current_term"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -19,7 +19,7 @@ import static androidx.room.ForeignKey.CASCADE;
         )
 )
 public class CourseEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int courseId;
     private int courseTermId;
     private String name, status, mentorName, mentorPhone, mentorEmail, notes;

@@ -6,12 +6,21 @@ import java.util.Date;
 
 @Entity(tableName = "term_table")
 public class TermEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int termId;
     private String title;
     private Date startDate;
     private Date endDate;
     private boolean current;
+
+    public TermEntity() {};
+
+    public TermEntity(String title, Date startDate, Date endDate, boolean current) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.current = current;
+    }
 
     public TermEntity(int termId, String title, Date startDate, Date endDate, boolean current) {
         this.termId = termId;

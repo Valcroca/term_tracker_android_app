@@ -19,14 +19,13 @@ import static androidx.room.ForeignKey.CASCADE;
 )
 
 public class AssessmentEntity {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int assessmentId;
     private int assessmentCourseId;
     private String name, info, alertName, status;
     private String dueDate, alertDate;
 
-    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, String info, String alertName, String status, String dueDate, String alertDate) {
-        this.assessmentId = assessmentId;
+    public AssessmentEntity(int assessmentCourseId, String name, String info, String alertName, String status, String dueDate, String alertDate) {
         this.assessmentCourseId = assessmentCourseId;
         this.name = name;
         this.info = info;

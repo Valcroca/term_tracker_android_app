@@ -21,7 +21,7 @@ import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 5, exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 9, exportSchema = false)
 @TypeConverters(DateConverter.class)
 
 public abstract class TrackerManagementDatabase extends RoomDatabase {
@@ -32,7 +32,7 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
 
     private static volatile TrackerManagementDatabase INSTANCE;
 
-    static TrackerManagementDatabase getDatabase(final Context context) {
+    public static TrackerManagementDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (TrackerManagementDatabase.class) {
                 if (INSTANCE == null) {
@@ -82,32 +82,32 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
             mAssessmentDAO.deleteAllAssessments();
 
             //create terms
-            TermEntity term= new TermEntity(1, "First Term", DateConverter.toDate("01/01/2020"), DateConverter.toDate("06/30/2020"), false);
-            mTermDAO.insertTerm(term);
-            term=new TermEntity(2, "Second Term", DateConverter.toDate("07/01/2020"), DateConverter.toDate("12/31/2020"), true);
-            mTermDAO.insertTerm(term);
-            term=new TermEntity(3, "Third Term", DateConverter.toDate("01/01/2021"), DateConverter.toDate("06/30/2021"), false);
-            mTermDAO.insertTerm(term);
+            TermEntity term1= new TermEntity(1,"First Term", DateConverter.toDate("01/01/2020"), DateConverter.toDate("06/30/2020"), false);
+            mTermDAO.insertTerm(term1);
+            TermEntity term2=new TermEntity(2,"Second Term", DateConverter.toDate("07/01/2020"), DateConverter.toDate("12/31/2020"), true);
+            mTermDAO.insertTerm(term2);
+            TermEntity term3=new TermEntity(3,"Third Term", DateConverter.toDate("01/01/2021"), DateConverter.toDate("06/30/2021"), false);
+            mTermDAO.insertTerm(term3);
             //create courses
-            CourseEntity course = new CourseEntity(1, 1, "First Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
-            mCourseDAO.insert(course);
-            course=new CourseEntity(2, 1, "Second Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
-            mCourseDAO.insert(course);
-            course=new CourseEntity(3, 2, "Third Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com","notes", null);
-            mCourseDAO.insert(course);
-            course=new CourseEntity(4, 2, "Fourth Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
-            mCourseDAO.insert(course);
+            CourseEntity course1 = new CourseEntity( 1, term1.getTermId(), "First Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            mCourseDAO.insert(course1);
+            CourseEntity course2=new CourseEntity( 2, term1.getTermId(), "Second Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            mCourseDAO.insert(course2);
+            CourseEntity course3 =new CourseEntity( 3, term2.getTermId(), "Third Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com","notes", null);
+            mCourseDAO.insert(course3);
+            CourseEntity course4 =new CourseEntity( 4, term2.getTermId(), "Fourth Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", null);
+            mCourseDAO.insert(course4);
             //create assessments
-            AssessmentEntity assessment = new AssessmentEntity(1,1,"Mid-term Test", "info", "One day prior", "status", null, null);
-            mAssessmentDAO.insert(assessment);
-            assessment= new AssessmentEntity(2,1,"Final Test", "info", "One day prior", "status", null, null);
-            mAssessmentDAO.insert(assessment);
-            assessment= new AssessmentEntity(3,2,"Final Test", "info", "One day prior", "status", null, null);
-            mAssessmentDAO.insert(assessment);
-            assessment= new AssessmentEntity(4,3,"Final Test", "info", "One day prior", "status", null, null);
-            mAssessmentDAO.insert(assessment);
-            assessment= new AssessmentEntity(5,4,"Final Test", "info", "One day prior", "status", null, null);
-            mAssessmentDAO.insert(assessment);
+//            AssessmentEntity assessment1 = new AssessmentEntity(course1.getCourseId(),"Mid-term Test", "info", "One day prior", "status", null, null);
+//            mAssessmentDAO.insert(assessment1);
+//            AssessmentEntity assessment2 = new AssessmentEntity(course1.getCourseId(),"Final Test", "info", "One day prior", "status", null, null);
+//            mAssessmentDAO.insert(assessment2);
+//            AssessmentEntity assessment3 = new AssessmentEntity(course2.getCourseId(),"Final Test", "info", "One day prior", "status", null, null);
+//            mAssessmentDAO.insert(assessment3);
+//            AssessmentEntity assessment4 = new AssessmentEntity(course3.getCourseId(),"Final Test", "info", "One day prior", "status", null, null);
+//            mAssessmentDAO.insert(assessment4);
+//            AssessmentEntity assessment5 = new AssessmentEntity(course4.getCourseId(),"Final Test", "info", "One day prior", "status", null, null);
+//            mAssessmentDAO.insert(assessment5);
 
             return null;
         }

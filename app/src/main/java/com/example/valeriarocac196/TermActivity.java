@@ -35,13 +35,13 @@ public class TermActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.addTerm);
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TermActivity.this, AddTermActivity.class);
-                intent.putExtra("termId",mTermViewModel.lastID()+1);
+//                intent.putExtra("termId",mTermViewModel.lastID()+1);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });

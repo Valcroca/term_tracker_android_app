@@ -33,7 +33,7 @@ public class TermViewModel extends AndroidViewModel {
     }
 
     public void insertTerm(TermEntity termEntity){
-        mRepository.insert(termEntity);
+        mRepository.insertTerm(termEntity);
     }
 
     public void updateTerm(TermEntity termEntity) {

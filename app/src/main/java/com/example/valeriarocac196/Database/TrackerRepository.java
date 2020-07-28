@@ -45,7 +45,7 @@ public class TrackerRepository {
     public LiveData<List<AssessmentEntity>> getAllAssociatedAssessments(int courseId) { return mAllAssociatedAssessments; }
 
     //term methods
-    public void insert (TermEntity termEntity) {
+    public void insertTerm (TermEntity termEntity) {
         new insertAsyncTask(mTermDAO).execute(termEntity);
     }
 
