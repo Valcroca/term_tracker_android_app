@@ -35,6 +35,7 @@ public class TermActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //add term button
         FloatingActionButton fab = findViewById(R.id.addTerm);
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
         fab.setOnClickListener(new View.OnClickListener() {

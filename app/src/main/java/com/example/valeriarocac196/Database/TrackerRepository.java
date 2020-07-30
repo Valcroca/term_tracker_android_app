@@ -134,6 +134,33 @@ public class TrackerRepository {
         }
     }
 
+    public void updateCourse(CourseEntity course) {
+        new updateAsyncTask1(mCourseDAO).execute(course);
+    }
+
+    private static class updateAsyncTask1 extends AsyncTask<CourseEntity, Void, Void> {
+
+        private CourseDAO mAsyncTaskDao;
+
+        updateAsyncTask1(CourseDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final CourseEntity... params) {
+            mAsyncTaskDao.updateCourse(params[0]);
+            return null;
+        }
+    }
+
+    public void deleteCourse(final CourseEntity course) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run(){
+                mCourseDAO.deleteCourse(course);
+            }
+        });
+    }
     //assessment methods
     public void insert(AssessmentEntity assessmentEntity) {
         new insertAsyncTask2(mAssessmentDAO).execute(assessmentEntity);

@@ -32,11 +32,6 @@ public class TermViewModel extends AndroidViewModel {
         return mAllTerms;
     }
 
-//    public TermEntity getTerm(int termId) {
-//        TermEntity termFound = mRepository.getTermById(termId);
-//        return termFound;
-//    }
-
     public void insertTerm(TermEntity termEntity){
         mRepository.insertTerm(termEntity);
     }

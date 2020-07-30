@@ -23,9 +23,10 @@ public class AssessmentEntity {
     private int assessmentId;
     private int assessmentCourseId;
     private String name, info, alertName, status;
-    private String dueDate, alertDate;
+    private Date dueDate, alertDate;
 
-    public AssessmentEntity(int assessmentCourseId, String name, String info, String alertName, String status, String dueDate, String alertDate) {
+    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, String info, String alertName, String status, Date dueDate, Date alertDate) {
+        this.assessmentId = assessmentId;
         this.assessmentCourseId = assessmentCourseId;
         this.name = name;
         this.info = info;
@@ -83,19 +84,19 @@ public class AssessmentEntity {
         this.status = status;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 
-    public String getAlertDate() {
+    public Date getAlertDate() {
         return alertDate;
     }
 
-    public void setAlertDate(String alertDate) {
+    public void setAlertDate(Date alertDate) {
         this.alertDate = alertDate;
     }
 }

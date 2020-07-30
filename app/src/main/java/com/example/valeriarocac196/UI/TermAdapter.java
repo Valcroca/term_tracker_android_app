@@ -17,6 +17,7 @@ import com.example.valeriarocac196.R;
 import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
+
     class TermViewHolder extends RecyclerView.ViewHolder {
         private final TextView termTitleItemView;
         private final TextView termStartItemView;
@@ -60,7 +61,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
     @Override
     public void onBindViewHolder(TermViewHolder holder, int position) {
-
         if (mTerms != null) {
             final TermEntity current = mTerms.get(position);
             holder.termTitleItemView.setText(current.getTitle());

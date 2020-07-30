@@ -39,20 +39,26 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     final CourseEntity current = mCourses.get(position);
                     Intent intent = new Intent(context, EditCourseActivity.class);
                     intent.putExtra("courseId", current.getCourseId());
-                    intent.putExtra("courseName", current.getName());
-                    intent.putExtra("courseStart", current.getStartDate());
-                    intent.putExtra("courseEnd", current.getEndDate());
-                    intent.putExtra("position", position);
                     intent.putExtra("courseTermId", current.getCourseTermId());
+                    intent.putExtra("courseName", current.getName());
+                    intent.putExtra("courseStart", DateConverter.formatDateString(current.getStartDate().toString()));
+                    intent.putExtra("courseEnd", DateConverter.formatDateString(current.getEndDate().toString()));
+                    intent.putExtra("courseStatus", current.getStatus());
+                    intent.putExtra("courseMentorName", current.getMentorName());
+                    intent.putExtra("courseMentorPhone", current.getMentorPhone());
+                    intent.putExtra("courseMentorEmail", current.getMentorEmail());
+                    intent.putExtra("courseNotes", current.getNotes());
+                    intent.putExtra("courseAlertDate", DateConverter.formatDateString(current.getCourseAlertDate().toString()));
+                    intent.putExtra("position", position);
                     context.startActivity(intent);
                 }
             });
         }
     }
 
+    private List<CourseEntity> mCourses;
     private final LayoutInflater mInflater;
     private final Context context;
-    private List<CourseEntity> mCourses;
 
     public CourseAdapter(Context context) {
         this.mInflater = LayoutInflater.from(context);
@@ -69,7 +75,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     @Override
     public void onBindViewHolder(CourseViewHolder holder, int position) {
         if (mCourses != null) {
-            CourseEntity current = mCourses.get(position);
+            final CourseEntity current = mCourses.get(position);
             holder.courseNameItemView.setText(current.getName());
             holder.courseStartItemView.setText("Start: " + DateConverter.formatDateString(current.getStartDate().toString()));
             holder.courseEndItemView.setText("End: " + DateConverter.formatDateString(current.getEndDate().toString()));
@@ -80,6 +86,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         }
     }
 
+    public void setCourses(List<CourseEntity> courses) {
+        mCourses = courses;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         if (mCourses != null)
@@ -87,8 +98,4 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         else return 0;
     }
 
-    public void setCourses(List<CourseEntity> courses) {
-        mCourses = courses;
-        notifyDataSetChanged();
-    }
 }

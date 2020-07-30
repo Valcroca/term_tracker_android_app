@@ -55,6 +55,7 @@ public class EditTermActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_term);
         mTermViewModel = new ViewModelProvider(this).get(TermViewModel.class);
+        mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -149,12 +150,14 @@ public class EditTermActivity extends AppCompatActivity {
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
             public void onChanged(@Nullable final List<CourseEntity> courses) {
+                filteredCourses.clear();
                 for (CourseEntity c : courses) {
                     if (c.getCourseTermId() == getIntent().getIntExtra("termId", 0)) {
                         filteredCourses.add(c);
                     }
-                }
                 courseAdapter.setCourses(filteredCourses);
+                }
+
             }
         });
 
@@ -179,9 +182,7 @@ public class EditTermActivity extends AppCompatActivity {
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }
-
         });
-
 
         //delete term button
         final Button deleteButton = findViewById(R.id.button_delete);
@@ -218,7 +219,7 @@ public class EditTermActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseEnd")));
+            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseEnd")), getIntent().getStringExtra("status"), getIntent().getStringExtra("mentorName"), getIntent().getStringExtra("mentorPhone"), getIntent().getStringExtra("mentorEmail"), getIntent().getStringExtra("notes"), DateConverter.toDate(data.getStringExtra("courseAlertDate")));
             mCourseViewModel.insert(course);
         }
     }

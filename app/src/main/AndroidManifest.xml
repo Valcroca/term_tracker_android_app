@@ -25,6 +25,26 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
+            android:name=".AddCourseActivity"
+            android:label="New Course"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AddAssessmentActivity"
+            android:label="New Assessment"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".EditCourseActivity"
+            android:label="Course Info"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".EditAssessmentActivity"
+            android:label="Assessment Info"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
             android:name=".CurrentTermActivity"
             android:label="@string/title_activity_current_term"
             android:theme="@style/AppTheme.NoActionBar" />

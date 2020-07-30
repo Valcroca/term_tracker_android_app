@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".EditCourseActivity"
+    tools:showIn="@layout/activity_edit_course">
+
+    <TextView
+        android:id="@+id/courseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Course Name"
+        tools:layout_editor_absoluteX="204dp"
+        tools:layout_editor_absoluteY="53dp"
+        app:layout_constraintBottom_toBottomOf="@id/editCourseName"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Name"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="50dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseName"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/courseStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Date"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseStart"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseStart"
+        app:layout_constraintTop_toBottomOf="@id/editCourseName"/>
+
+    <TextView
+        android:id="@+id/courseEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="End Date"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseEnd"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseEnd"
+        app:layout_constraintTop_toBottomOf="@id/editCourseStart"/>
+
+    <TextView
+        android:id="@+id/courseStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseStatus"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseStatus"
+        app:layout_constraintTop_toBottomOf="@id/editCourseEnd" />
+
+    <TextView
+        android:id="@+id/courseMentorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mentor Name"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorName"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseMentorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseMentorName"
+        app:layout_constraintTop_toBottomOf="@id/editCourseStatus" />
+
+    <TextView
+        android:id="@+id/courseMentorPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mentor Phone"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorPhone"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseMentorPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseMentorPhone"
+        app:layout_constraintTop_toBottomOf="@id/editCourseMentorName" />
+
+    <TextView
+        android:id="@+id/courseMentorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mentor Email"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorEmail"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseMentorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseMentorEmail"
+        app:layout_constraintTop_toBottomOf="@id/editCourseMentorPhone" />
+
+    <TextView
+        android:id="@+id/courseNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseNotes"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseNotes"
+        app:layout_constraintTop_toBottomOf="@id/editCourseMentorEmail" />
+
+    <TextView
+        android:id="@+id/courseAlertDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AlertDate"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="112dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editCourseAlertDate"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editCourseAlertDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="115dp"
+        app:layout_constraintLeft_toRightOf="@+id/courseAlertDate"
+        app:layout_constraintTop_toBottomOf="@id/editCourseNotes" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="Save"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseAlertDate"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FF5722"
+        android:text="Delete"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseAlertDate"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/course_assessments"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="Course Assessments:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/button_save"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/associated_assessments"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@android:color/darker_gray"
+        tools:listitem="@layout/course_list_item"
+        app:layout_constraintTop_toBottomOf="@+id/course_assessments"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

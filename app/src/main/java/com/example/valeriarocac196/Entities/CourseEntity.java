@@ -41,13 +41,20 @@ public class CourseEntity {
         this.courseAlertDate = courseAlertDate;
     }
 
-    public CourseEntity(int i, int courseTermId, String courseName, Date courseStart, Date courseEnd) {
-        this.courseId = courseId;
-        this.courseTermId = courseTermId;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+//    public CourseEntity(int courseTermId, String name, Date startDate, Date endDate, String status, String mentorName, String mentorPhone, String mentorEmail, String notes, Date courseAlertDate) {
+//        this.courseTermId = courseTermId;
+//        this.name = name;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.status = status;
+//        this.mentorName = mentorName;
+//        this.mentorPhone = mentorPhone;
+//        this.mentorEmail = mentorEmail;
+//        this.notes = notes;
+//        this.courseAlertDate = courseAlertDate;
+//    }
+
+
 
     public int getCourseId() {
         return courseId;
