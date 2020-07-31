@@ -110,6 +110,7 @@ public class AddTermActivity extends AppCompatActivity {
             String sDate = month + "/" + dayOfMonth + "/" + year;
             mEditTermStart.setText(sDate);
         };
+
         final TermAdapter adapter = new TermAdapter(this);
         mTermViewModel.getAllTerms().observe(this, new Observer<List<TermEntity>>() {
             @Override
@@ -142,7 +143,6 @@ public class AddTermActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
-
             TermEntity term = new TermEntity( data.getStringExtra("termTitle"), DateConverter.toDate(data.getStringExtra("termStart")),  DateConverter.toDate(data.getStringExtra("termEnd")), false);
             mTermViewModel.insertTerm(term);
         }

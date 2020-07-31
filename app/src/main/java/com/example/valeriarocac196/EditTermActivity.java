@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -136,6 +135,7 @@ public class EditTermActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EditTermActivity.this, AddCourseActivity.class);
+                intent.putExtra("courseTermId", termId[0]);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -220,7 +220,7 @@ public class EditTermActivity extends AppCompatActivity {
         if(resultCode==RESULT_OK) {
 
             CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseEnd")), getIntent().getStringExtra("status"), getIntent().getStringExtra("mentorName"), getIntent().getStringExtra("mentorPhone"), getIntent().getStringExtra("mentorEmail"), getIntent().getStringExtra("notes"), DateConverter.toDate(data.getStringExtra("courseAlertDate")));
-            mCourseViewModel.insert(course);
+            mCourseViewModel.insertCourse(course);
         }
     }
 }

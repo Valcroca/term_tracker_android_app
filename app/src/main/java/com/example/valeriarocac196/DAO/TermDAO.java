@@ -18,7 +18,7 @@ public interface TermDAO {
     void insertTerm(TermEntity term);
 
     @Update
-    void updateTerm (TermEntity termEntity);
+    void updateTerm(TermEntity termEntity);
 
     @Delete
     void deleteTerm(TermEntity term);

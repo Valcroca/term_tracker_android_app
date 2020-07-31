@@ -57,39 +57,30 @@ public class TrackerRepository {
         new insertAsyncTask(mTermDAO).execute(termEntity);
     }
     private static class insertAsyncTask extends AsyncTask<TermEntity, Void, Void> {
-
         private TermDAO mAsyncTaskDao;
-
         insertAsyncTask(TermDAO dao) {
             mAsyncTaskDao = dao;
         }
-
         @Override
         protected Void doInBackground(final TermEntity... params) {
             mAsyncTaskDao.insertTerm(params[0]);
             return null;
         }
     }
-
     public void updateTerm(TermEntity term) {
         new updateAsyncTask(mTermDAO).execute(term);
     }
-
     private static class updateAsyncTask extends AsyncTask<TermEntity, Void, Void> {
-
         private TermDAO mAsyncTaskDao;
-
         updateAsyncTask(TermDAO dao) {
             mAsyncTaskDao = dao;
         }
-
         @Override
         protected Void doInBackground(final TermEntity... params) {
             mAsyncTaskDao.updateTerm(params[0]);
             return null;
         }
     }
-
     public void deleteTerm(final TermEntity term) {
         executor.execute(new Runnable() {
             @Override
@@ -99,37 +90,18 @@ public class TrackerRepository {
         });
     }
 
-//    private static class deleteAsyncTask extends AsyncTask<TermEntity, Void, Void> {
-//
-//        private TermDAO mAsyncTaskDao;
-//
-//        deleteAsyncTask(TermDAO dao) {
-//            mAsyncTaskDao = dao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(final TermEntity... params) {
-//            mAsyncTaskDao.deleteTerm(params[0]);
-//            return null;
-//        }
-//    }
-
     //course methods
-    public void insert (CourseEntity courseEntity) {
+    public void insertCourse(CourseEntity courseEntity) {
         new insertAsyncTask1(mCourseDAO).execute(courseEntity);
     }
-
     private static class insertAsyncTask1 extends AsyncTask<CourseEntity, Void, Void> {
-
         private CourseDAO mAsyncTaskDao;
-
         insertAsyncTask1(CourseDAO dao) {
             mAsyncTaskDao = dao;
         }
-
         @Override
         protected Void doInBackground(final CourseEntity... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertCourse(params[0]);
             return null;
         }
     }

@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_add_term">
 
     <TextView
-        android:id="@+id/courseName"
+        android:id="@+id/termTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -24,7 +24,7 @@
         tools:layout_editor_absoluteX="204dp" />
 
     <EditText
-        android:id="@+id/editCourseName"
+        android:id="@+id/editTermTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -38,7 +38,7 @@
         tools:layout_editor_absoluteX="267dp" />
 
     <TextView
-        android:id="@+id/courseStart"
+        android:id="@+id/termStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"

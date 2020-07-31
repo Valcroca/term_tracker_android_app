@@ -15,10 +15,10 @@ import java.util.List;
 @Dao
 public interface CourseDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(CourseEntity course);
+    void insertCourse(CourseEntity course);
 
     @Update
-    void updateCourse (CourseEntity courseEntity);
+    void updateCourse(CourseEntity courseEntity);
 
     @Delete
     void deleteCourse(CourseEntity course);
@@ -29,7 +29,7 @@ public interface CourseDAO {
     @Query("DELETE FROM course_table")
     void deleteAllCourses();
 
-    @Query("SELECT * FROM course_table ORDER BY courseID ASC")
+    @Query("SELECT * FROM course_table ORDER BY courseId ASC")
     LiveData<List<CourseEntity>> getAllCourses();
 
     @Query ("SELECT * FROM course_table WHERE courseTermId= :termId ORDER BY courseID ASC")

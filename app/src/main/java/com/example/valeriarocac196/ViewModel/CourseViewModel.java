@@ -30,8 +30,8 @@ public class CourseViewModel extends AndroidViewModel {
         return mAllCourses;
     }
 
-    public void insert(CourseEntity courseEntity){
-        mRepository.insert(courseEntity);
+    public void insertCourse(CourseEntity courseEntity){
+        mRepository.insertCourse(courseEntity);
     }
 
     public void updateCourse(CourseEntity courseEntity){ mRepository.updateCourse(courseEntity); }

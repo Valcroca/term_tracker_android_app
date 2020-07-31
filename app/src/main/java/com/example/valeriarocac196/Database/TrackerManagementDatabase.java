@@ -3,10 +3,6 @@ package com.example.valeriarocac196.Database;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -90,13 +86,13 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
             mTermDAO.insertTerm(term3);
             //create courses
             CourseEntity course1 = new CourseEntity( 1, term1.getTermId(), "First Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", DateConverter.toDate("01/01/2020"));
-            mCourseDAO.insert(course1);
+            mCourseDAO.insertCourse(course1);
             CourseEntity course2=new CourseEntity( 2, term1.getTermId(), "Second Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", DateConverter.toDate("01/01/2020"));
-            mCourseDAO.insert(course2);
+            mCourseDAO.insertCourse(course2);
             CourseEntity course3 =new CourseEntity( 3, term2.getTermId(), "Third Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com","notes", DateConverter.toDate("01/01/2020"));
-            mCourseDAO.insert(course3);
+            mCourseDAO.insertCourse(course3);
             CourseEntity course4 =new CourseEntity( 4, term2.getTermId(), "Fourth Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", DateConverter.toDate("01/01/2020"));
-            mCourseDAO.insert(course4);
+            mCourseDAO.insertCourse(course4);
             //create assessments
             AssessmentEntity assessment1 = new AssessmentEntity(1, course1.getCourseId(),"Mid-term Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
             mAssessmentDAO.insert(assessment1);
