@@ -16,9 +16,11 @@ public class AssessmentViewModel extends AndroidViewModel {
     private TrackerRepository mRepository;
     private LiveData<List<AssessmentEntity>> mAllAssessments;
     private LiveData<List<AssessmentEntity>> mAssociatedAssessments;
+
     public AssessmentViewModel(Application application, int courseId){
         super(application);
         mRepository=new TrackerRepository(application);
+        mAllAssessments=mRepository.getAllAssessments();
         mAssociatedAssessments=mRepository.getAllAssociatedAssessments(courseId);
     }
     public AssessmentViewModel(Application application){
@@ -33,9 +35,13 @@ public class AssessmentViewModel extends AndroidViewModel {
     public LiveData<List<AssessmentEntity>> getAllAssessments(){
         return mAllAssessments;
     }
-    public void insert(AssessmentEntity assessmentEntity){
-        mRepository.insert(assessmentEntity);
-    }
+
+    public void updateAssessment(AssessmentEntity assessmentEntity) { mRepository.updateAssessment(assessmentEntity);}
+
+    public void insertAssessment(AssessmentEntity assessmentEntity){ mRepository.insertAssessment(assessmentEntity); }
+
+    public void deleteAssessment(AssessmentEntity assessmentEntity){ mRepository.deleteAssessment(assessmentEntity); }
+
     public int lastID(){
         return mAllAssessments.getValue().size();
     }

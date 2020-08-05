@@ -192,10 +192,11 @@ public class EditCourseActivity extends AppCompatActivity {
         mAssessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
         mAssessmentViewModel.getAllAssessments().observe(this, new Observer<List<AssessmentEntity>>() {
             @Override
-            public void onChanged(@Nullable final List<AssessmentEntity> courses) {
-                for (AssessmentEntity c : courses) {
-                    if (c.getAssessmentCourseId() == getIntent().getIntExtra("courseId", 0)) {
-                        filteredAssessments.add(c);
+            public void onChanged(@Nullable final List<AssessmentEntity> assessments) {
+                filteredAssessments.clear();
+                for (AssessmentEntity a : assessments) {
+                    if (a.getAssessmentCourseId() == getIntent().getIntExtra("courseId", 0)) {
+                        filteredAssessments.add(a);
                     }
                 }
                 assessmentAdapter.setAssessments(filteredAssessments);
@@ -267,7 +268,6 @@ public class EditCourseActivity extends AppCompatActivity {
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }
-
         });
     }
 
@@ -281,8 +281,8 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("assessmentCourseId",0), data.getStringExtra("assessmentName"), data.getStringExtra("info"), data.getStringExtra("alertName"), data.getStringExtra("status"), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDate")));
-            mAssessmentViewModel.insert(assessment);
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("assessmentCourseId",0), data.getStringExtra("assessmentName"), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDate")));
+            mAssessmentViewModel.insertAssessment(assessment);
         }
     }
 

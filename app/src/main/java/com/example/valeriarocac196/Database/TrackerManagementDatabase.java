@@ -17,7 +17,7 @@ import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 11, exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 12, exportSchema = false)
 @TypeConverters(DateConverter.class)
 
 public abstract class TrackerManagementDatabase extends RoomDatabase {
@@ -94,16 +94,16 @@ public abstract class TrackerManagementDatabase extends RoomDatabase {
             CourseEntity course4 =new CourseEntity( 4, term2.getTermId(), "Fourth Course", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"), "status", "Mable Nice", "801-333-6655", "mabel@gmail.com", "notes", DateConverter.toDate("01/01/2020"));
             mCourseDAO.insertCourse(course4);
             //create assessments
-            AssessmentEntity assessment1 = new AssessmentEntity(1, course1.getCourseId(),"Mid-term Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
-            mAssessmentDAO.insert(assessment1);
-            AssessmentEntity assessment2 = new AssessmentEntity(2, course1.getCourseId(),"Final Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
-            mAssessmentDAO.insert(assessment2);
-            AssessmentEntity assessment3 = new AssessmentEntity(3, course2.getCourseId(),"Final Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
-            mAssessmentDAO.insert(assessment3);
-            AssessmentEntity assessment4 = new AssessmentEntity(4, course3.getCourseId(),"Final Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
-            mAssessmentDAO.insert(assessment4);
-            AssessmentEntity assessment5 = new AssessmentEntity(5, course4.getCourseId(),"Final Test", "info", "One day prior", "status", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
-            mAssessmentDAO.insert(assessment5);
+            AssessmentEntity assessment1 = new AssessmentEntity(1, course1.getCourseId(),"Mid-term Test", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
+            mAssessmentDAO.insertAssessment(assessment1);
+            AssessmentEntity assessment2 = new AssessmentEntity(2, course1.getCourseId(),"Final Test", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
+            mAssessmentDAO.insertAssessment(assessment2);
+            AssessmentEntity assessment3 = new AssessmentEntity(3, course2.getCourseId(),"Final Test", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
+            mAssessmentDAO.insertAssessment(assessment3);
+            AssessmentEntity assessment4 = new AssessmentEntity(4, course3.getCourseId(),"Final Test", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
+            mAssessmentDAO.insertAssessment(assessment4);
+            AssessmentEntity assessment5 = new AssessmentEntity(5, course4.getCourseId(),"Final Test", DateConverter.toDate("01/01/2020"), DateConverter.toDate("01/01/2020"));
+            mAssessmentDAO.insertAssessment(assessment5);
 
             return null;
         }

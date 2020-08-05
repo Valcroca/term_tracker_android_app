@@ -23,16 +23,12 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     class AssessmentViewHolder extends RecyclerView.ViewHolder {
         private final TextView assessmentNameItemView;
-        private final TextView assessmentInfoItemView;
-        private final TextView assessmentStatusItemView;
         private final TextView assessmentDueDateItemView;
         private final TextView assessmentAlertDateItemView;
 
         private AssessmentViewHolder(View itemView) {
             super(itemView);
             assessmentNameItemView = itemView.findViewById(R.id.assessmentNameTextView);
-            assessmentInfoItemView = itemView.findViewById(R.id.assessmentInfoTextView);
-            assessmentStatusItemView = itemView.findViewById(R.id.assessmentStatusTextView);
             assessmentDueDateItemView = itemView.findViewById(R.id.assessmentDueDateTextView);
             assessmentAlertDateItemView = itemView.findViewById(R.id.assessmentAlertDateTextView);
 
@@ -45,10 +41,8 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                     intent.putExtra("assessmentId", current.getAssessmentId());
                     intent.putExtra("assessmentCourseId", current.getAssessmentCourseId());
                     intent.putExtra("assessmentName", current.getName());
-                    intent.putExtra("assessmentInfo", current.getInfo());
-                    intent.putExtra("assessmentStatus", current.getStatus());
-                    intent.putExtra("assessmentDueDate", current.getDueDate());
-                    intent.putExtra("assessmentAlertDate", current.getAlertDate());
+                    intent.putExtra("assessmentDueDate", DateConverter.formatDateString(current.getDueDate().toString()));
+                    intent.putExtra("assessmentAlertDate", DateConverter.formatDateString(current.getAlertDate().toString()));
                     intent.putExtra("position", position);
                     context.startActivity(intent);
                 }
@@ -77,8 +71,6 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
         if (mAssessments != null) {
             AssessmentEntity current = mAssessments.get(position);
             holder.assessmentNameItemView.setText(current.getName());
-            holder.assessmentInfoItemView.setText("Info: " + current.getInfo());
-            holder.assessmentStatusItemView.setText("Status: " + current.getStatus());
             holder.assessmentDueDateItemView.setText("Due Date: " + DateConverter.formatDateString(current.getDueDate().toString()));
             holder.assessmentAlertDateItemView.setText("Alarm Date: " + DateConverter.formatDateString(current.getAlertDate().toString()));
         } else {

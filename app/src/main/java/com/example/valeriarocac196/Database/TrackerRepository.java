@@ -52,7 +52,7 @@ public class TrackerRepository {
 
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    //term methods
+    //Term methods
     public void insertTerm (TermEntity termEntity) {
         new insertAsyncTask(mTermDAO).execute(termEntity);
     }
@@ -90,7 +90,7 @@ public class TrackerRepository {
         });
     }
 
-    //course methods
+    //Course methods
     public void insertCourse(CourseEntity courseEntity) {
         new insertAsyncTask1(mCourseDAO).execute(courseEntity);
     }
@@ -105,26 +105,20 @@ public class TrackerRepository {
             return null;
         }
     }
-
     public void updateCourse(CourseEntity course) {
         new updateAsyncTask1(mCourseDAO).execute(course);
     }
-
     private static class updateAsyncTask1 extends AsyncTask<CourseEntity, Void, Void> {
-
         private CourseDAO mAsyncTaskDao;
-
         updateAsyncTask1(CourseDAO dao) {
             mAsyncTaskDao = dao;
         }
-
         @Override
         protected Void doInBackground(final CourseEntity... params) {
             mAsyncTaskDao.updateCourse(params[0]);
             return null;
         }
     }
-
     public void deleteCourse(final CourseEntity course) {
         executor.execute(new Runnable() {
             @Override
@@ -133,24 +127,43 @@ public class TrackerRepository {
             }
         });
     }
-    //assessment methods
-    public void insert(AssessmentEntity assessmentEntity) {
+
+    //Assessment methods
+    public void insertAssessment(AssessmentEntity assessmentEntity) {
         new insertAsyncTask2(mAssessmentDAO).execute(assessmentEntity);
     }
-
     private static class insertAsyncTask2 extends AsyncTask<AssessmentEntity, Void, Void> {
-
         private AssessmentDAO mAsyncTaskDao;
-
         insertAsyncTask2(AssessmentDAO dao) {
             mAsyncTaskDao = dao;
         }
-
         @Override
         protected Void doInBackground(final AssessmentEntity... params) {
-            mAsyncTaskDao.insert(params[0]);
+            mAsyncTaskDao.insertAssessment(params[0]);
             return null;
         }
+    }
+    public void updateAssessment(AssessmentEntity assessment) {
+        new updateAsyncTask2(mAssessmentDAO).execute(assessment);
+    }
+    private static class updateAsyncTask2 extends AsyncTask<AssessmentEntity, Void, Void> {
+        private AssessmentDAO mAsyncTaskDao;
+        updateAsyncTask2(AssessmentDAO dao) {
+            mAsyncTaskDao = dao;
+        }
+        @Override
+        protected Void doInBackground(final AssessmentEntity... params) {
+            mAsyncTaskDao.updateAssessment(params[0]);
+            return null;
+        }
+    }
+    public void deleteAssessment(final AssessmentEntity assessment) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run(){
+                mAssessmentDAO.deleteAssessment(assessment);
+            }
+        });
     }
 
 }

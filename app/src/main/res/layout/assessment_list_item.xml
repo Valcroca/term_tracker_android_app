@@ -19,24 +19,6 @@
         android:textColor="#000000" />
 
     <TextView
-        android:id="@+id/assessmentInfoTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_orange_light"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/assessmentStatusTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_orange_light"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000" />
-
-    <TextView
         android:id="@+id/assessmentDueDateTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

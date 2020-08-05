@@ -18,7 +18,7 @@ public interface CourseDAO {
     void insertCourse(CourseEntity course);
 
     @Update
-    void updateCourse(CourseEntity courseEntity);
+    void updateCourse(CourseEntity course);
 
     @Delete
     void deleteCourse(CourseEntity course);

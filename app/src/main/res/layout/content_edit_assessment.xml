@@ -30,44 +30,44 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/assessmentStart"
+        android:id="@+id/assessmentDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Date"
+        android:text="Due Date"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="112dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editAssessmentStart"
+        app:layout_constraintBottom_toBottomOf="@+id/editAssessmentDueDate"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editAssessmentStart"
+        android:id="@+id/editAssessmentDueDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
-        app:layout_constraintLeft_toRightOf="@+id/assessmentStart"
+        app:layout_constraintLeft_toRightOf="@+id/assessmentDueDate"
         app:layout_constraintTop_toBottomOf="@id/editAssessmentName"/>
 
     <TextView
-        android:id="@+id/assessmentEnd"
+        android:id="@+id/assessmentAlertDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date"
+        android:text="Alert Date"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="112dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editAssessmentEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/editAssessmentAlertDate"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/editAssessmentEnd"
+        android:id="@+id/editAssessmentAlertDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
-        app:layout_constraintLeft_toRightOf="@+id/assessmentEnd"
-        app:layout_constraintTop_toBottomOf="@id/editAssessmentStart"/>
+        app:layout_constraintLeft_toRightOf="@+id/assessmentAlertDate"
+        app:layout_constraintTop_toBottomOf="@id/editAssessmentDueDate"/>
 
     <Button
         android:id="@+id/button_save"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="Save"
-        app:layout_constraintTop_toBottomOf="@+id/editAssessmentEnd"
+        app:layout_constraintTop_toBottomOf="@+id/editAssessmentAlertDate"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -85,7 +85,7 @@
         android:background="#FF5722"
         android:text="Delete"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editAssessmentEnd"
+        app:layout_constraintTop_toBottomOf="@+id/editAssessmentAlertDate"
         tools:ignore="MissingConstraints" />
 
 

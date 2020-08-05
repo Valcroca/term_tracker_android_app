@@ -22,16 +22,13 @@ public class AssessmentEntity {
     @PrimaryKey(autoGenerate = true)
     private int assessmentId;
     private int assessmentCourseId;
-    private String name, info, alertName, status;
+    private String name;
     private Date dueDate, alertDate;
 
-    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, String info, String alertName, String status, Date dueDate, Date alertDate) {
+    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, Date dueDate, Date alertDate) {
         this.assessmentId = assessmentId;
         this.assessmentCourseId = assessmentCourseId;
         this.name = name;
-        this.info = info;
-        this.alertName = alertName;
-        this.status = status;
         this.dueDate = dueDate;
         this.alertDate = alertDate;
     }
@@ -58,30 +55,6 @@ public class AssessmentEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getAlertName() {
-        return alertName;
-    }
-
-    public void setAlertName(String alertName) {
-        this.alertName = alertName;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Date getDueDate() {
