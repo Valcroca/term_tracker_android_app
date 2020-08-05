@@ -14,15 +14,9 @@ import java.util.List;
 public class AssessmentViewModel extends AndroidViewModel {
     int courseId;
     private TrackerRepository mRepository;
-    private LiveData<List<AssessmentEntity>> mAllAssessments;
     private LiveData<List<AssessmentEntity>> mAssociatedAssessments;
+    private LiveData<List<AssessmentEntity>> mAllAssessments;
 
-    public AssessmentViewModel(Application application, int courseId){
-        super(application);
-        mRepository=new TrackerRepository(application);
-        mAllAssessments=mRepository.getAllAssessments();
-        mAssociatedAssessments=mRepository.getAllAssociatedAssessments(courseId);
-    }
     public AssessmentViewModel(Application application){
         super(application);
         mRepository=new TrackerRepository(application);

@@ -61,6 +61,7 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course);
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        mAssessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -179,6 +180,7 @@ public class EditCourseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EditCourseActivity.this, AddAssessmentActivity.class);
+                intent.putExtra("assessmentCourseId", courseId[0]);
                 startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
@@ -281,7 +283,7 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("assessmentCourseId",0), data.getStringExtra("assessmentName"), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDate")));
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("courseId",0), data.getStringExtra("assessmentName"), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDate")));
             mAssessmentViewModel.insertAssessment(assessment);
         }
     }

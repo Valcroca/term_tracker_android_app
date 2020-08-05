@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Database.TrackerManagementDatabase;
+import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.UI.CourseAdapter;
 import com.example.valeriarocac196.ViewModel.CourseViewModel;
@@ -26,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 
 public class AddCourseActivity extends AppCompatActivity {
-    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private CourseViewModel mCourseViewModel;
 
     Calendar calendar = Calendar.getInstance();
@@ -69,13 +69,6 @@ public class AddCourseActivity extends AppCompatActivity {
         mEditCourseMentorEmail = findViewById(R.id.editCourseMentorEmail);
         mEditCourseNotes = findViewById(R.id.editCourseNotes);
         mEditCourseAlertDate = findViewById(R.id.editCourseAlertDate);
-
-        Date courseStart;
-        Date courseEnd;
-        Date courseAlertDate;
-//        final int[] courseId = new int[1];
-//        final int[] courseTermId = new int[1];
-
 
         // Course DatePickerDialog start date listener and functionality
         DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {
@@ -146,6 +139,7 @@ public class AddCourseActivity extends AppCompatActivity {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseAlertDate.setText(aDate);
         };
+        //save new course button
         final CourseAdapter adapter = new CourseAdapter(this);
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
             @Override
@@ -153,7 +147,6 @@ public class AddCourseActivity extends AppCompatActivity {
                 adapter.setCourses(courses);
             }
         });
-        //save new course button
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,6 +168,8 @@ public class AddCourseActivity extends AppCompatActivity {
                 CourseEntity tempCourse = new CourseEntity(mCourseViewModel.lastID()+1, courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(end), status, mentorName, mentorPhone, mentorEmail, notes, DateConverter.toDate(alert));
                 mCourseViewModel.insertCourse(tempCourse);
                 mCourseViewModel.getAllCourses();
+                //TODO: create an associated default assessment for each new course
+//                AssessmentEntity tempAssessment = new AssessmentEntity();
 
                 Toast.makeText(getApplicationContext(), "Course " + name + " Added!", Toast.LENGTH_LONG).show();
                 finish();

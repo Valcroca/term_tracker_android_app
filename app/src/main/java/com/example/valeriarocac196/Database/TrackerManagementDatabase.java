@@ -17,7 +17,7 @@ import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.Entities.TermEntity;
 
-@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 12, exportSchema = false)
+@Database(entities = {TermEntity.class, CourseEntity.class, AssessmentEntity.class}, version = 13, exportSchema = false)
 @TypeConverters(DateConverter.class)
 
 public abstract class TrackerManagementDatabase extends RoomDatabase {

@@ -37,7 +37,6 @@ public class EditAssessmentActivity extends AppCompatActivity {
     private EditText mEditAssessmentName;
     private EditText mEditAssessmentDueDate;
     private EditText mEditAssessmentAlertDate;
-    private EditText mEditAssessmentStatus;
     private int position;
     List<AssessmentEntity> filteredAssessments = new ArrayList<>();
 
@@ -56,7 +55,6 @@ public class EditAssessmentActivity extends AppCompatActivity {
         mEditAssessmentName = findViewById(R.id.editAssessmentName);
         mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
         mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
-
 
         final int[] assessmentId = new int[1];
 
@@ -99,14 +97,14 @@ public class EditAssessmentActivity extends AppCompatActivity {
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditAssessmentDueDate, calendar);
         };
-        mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
-        mEditAssessmentDueDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
+        mEditAssessmentAlertDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateConverter.updateDateText(mEditAssessmentDueDate, calendar);
+                DateConverter.updateDateText(mEditAssessmentAlertDate, calendar);
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar

@@ -61,13 +61,13 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     @NonNull
     @Override
-    public AssessmentAdapter.AssessmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AssessmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.assessment_list_item, parent, false);
-        return new AssessmentAdapter.AssessmentViewHolder(itemView);
+        return new AssessmentViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(AssessmentAdapter.AssessmentViewHolder holder, int position) {
+    public void onBindViewHolder(AssessmentViewHolder holder, int position) {
         if (mAssessments != null) {
             AssessmentEntity current = mAssessments.get(position);
             holder.assessmentNameItemView.setText(current.getName());
