@@ -22,15 +22,42 @@ public class AssessmentEntity {
     @PrimaryKey(autoGenerate = true)
     private int assessmentId;
     private int assessmentCourseId;
-    private String name;
-    private Date dueDate, alertDate;
+    private String name, status;
+    private Date startDate, alertStartDate, dueDate, alertDueDate;
 
-    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, Date dueDate, Date alertDate) {
+    public AssessmentEntity(int assessmentId, int assessmentCourseId, String name, String status, Date startDate, Date alertStartDate, Date dueDate, Date alertDueDate) {
         this.assessmentId = assessmentId;
         this.assessmentCourseId = assessmentCourseId;
         this.name = name;
+        this.status = status;
         this.dueDate = dueDate;
-        this.alertDate = alertDate;
+        this.alertDueDate = alertDueDate;
+        this.startDate = startDate;
+        this.alertStartDate = alertStartDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getAlertStartDate() {
+        return alertStartDate;
+    }
+
+    public void setAlertStartDate(Date alertStartDate) {
+        this.alertStartDate = alertStartDate;
     }
 
     public int getAssessmentId() {
@@ -65,11 +92,11 @@ public class AssessmentEntity {
         this.dueDate = dueDate;
     }
 
-    public Date getAlertDate() {
-        return alertDate;
+    public Date getAlertDueDate() {
+        return alertDueDate;
     }
 
-    public void setAlertDate(Date alertDate) {
-        this.alertDate = alertDate;
+    public void setAlertDueDate(Date alertDueDate) {
+        this.alertDueDate = alertDueDate;
     }
 }

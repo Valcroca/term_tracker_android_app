@@ -32,11 +32,16 @@ public class EditAssessmentActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance();
     public SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     public DatePickerDialog.OnDateSetListener assessmentDueDateListener;
-    public DatePickerDialog.OnDateSetListener alarmDateListener;
+    public DatePickerDialog.OnDateSetListener alarmDueDateListener;
+    public DatePickerDialog.OnDateSetListener assessmentStartDateListener;
+    public DatePickerDialog.OnDateSetListener alarmStartDateListener;
 
     private EditText mEditAssessmentName;
+    private EditText mEditAssessmentStatus;
     private EditText mEditAssessmentDueDate;
-    private EditText mEditAssessmentAlertDate;
+    private EditText mEditAssessmentAlertDueDate;
+    private EditText mEditAssessmentStartDate;
+    private EditText mEditAssessmentAlertStartDate;
     private int position;
     List<AssessmentEntity> filteredAssessments = new ArrayList<>();
 
@@ -53,8 +58,11 @@ public class EditAssessmentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mEditAssessmentName = findViewById(R.id.editAssessmentName);
+        mEditAssessmentStatus = findViewById(R.id.editAssessmentStatus);
         mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
-        mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
+        mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
+        mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
+        mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
 
         final int[] assessmentId = new int[1];
 
@@ -62,10 +70,15 @@ public class EditAssessmentActivity extends AppCompatActivity {
             //setting assessment data, passed from adapter, on edit fields
             assessmentId[0] = getIntent().getExtras().getInt("assessmentId");
             mEditAssessmentName.setText(getIntent().getStringExtra("assessmentName"));
+            mEditAssessmentStatus.setText(getIntent().getStringExtra("assessmentStatus"));
             String dueDateString = (String) getIntent().getExtras().get("assessmentDueDate");
             mEditAssessmentDueDate.setText(dueDateString);
-            String alertDateString = (String) getIntent().getExtras().get("assessmentAlertDate");
-            mEditAssessmentAlertDate.setText(alertDateString);
+            String alertDueDateString = (String) getIntent().getExtras().get("assessmentAlertDueDate");
+            mEditAssessmentAlertDueDate.setText(alertDueDateString);
+            String startDateString = (String) getIntent().getExtras().get("assessmentStartDate");
+            mEditAssessmentStartDate.setText(startDateString);
+            String alertStartDateString = (String) getIntent().getExtras().get("assessmentAlertStartDate");
+            mEditAssessmentAlertStartDate.setText(alertStartDateString);
         }
         // assessment DatePickerDialog due date listener and functionality
         DatePickerDialog.OnDateSetListener dueDate = (view, year, month, dayOfMonth) -> {
@@ -90,29 +103,76 @@ public class EditAssessmentActivity extends AppCompatActivity {
             String sDate = month + "/" + dayOfMonth + "/" + year;
             mEditAssessmentDueDate.setText(sDate);
         };
-        // assessment DatePickerDialog alert date listener and functionality
-        DatePickerDialog.OnDateSetListener alertDate = (view, year, month, dayOfMonth) -> {
+        // assessment DatePickerDialog alert due date listener and functionality
+        DatePickerDialog.OnDateSetListener alertDueDate = (view, year, month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditAssessmentDueDate, calendar);
         };
-        mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
-        mEditAssessmentAlertDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
+        mEditAssessmentAlertDueDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateConverter.updateDateText(mEditAssessmentAlertDate, calendar);
+                DateConverter.updateDateText(mEditAssessmentAlertDueDate, calendar);
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
                 .get(Calendar.DAY_OF_MONTH)).show());
-        alarmDateListener = (view, year, month, dayOfMonth) -> {
+        alarmDueDateListener = (view, year, month, dayOfMonth) -> {
             String sDate = month + "/" + dayOfMonth + "/" + year;
-            mEditAssessmentAlertDate.setText(sDate);
+            mEditAssessmentAlertDueDate.setText(sDate);
         };
+        // assessment DatePickerDialog start date listener and functionality
+        DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+        };
+        mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
+        mEditAssessmentStartDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+            }
+        }, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                .get(Calendar.DAY_OF_MONTH)).show());
+        assessmentStartDateListener = (view, year, month, dayOfMonth) -> {
+            String sDate = month + "/" + dayOfMonth + "/" + year;
+            mEditAssessmentStartDate.setText(sDate);
+        };
+        // assessment DatePickerDialog alert start date listener and functionality
+        DatePickerDialog.OnDateSetListener alertStartDate = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+        };
+        mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
+        mEditAssessmentAlertStartDate.setOnClickListener(v -> new DatePickerDialog(EditAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateConverter.updateDateText(mEditAssessmentAlertStartDate, calendar);
+            }
+        }, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                .get(Calendar.DAY_OF_MONTH)).show());
+        alarmStartDateListener = (view, year, month, dayOfMonth) -> {
+            String sDate = month + "/" + dayOfMonth + "/" + year;
+            mEditAssessmentAlertStartDate.setText(sDate);
+        };
+        //save edited course button
         mAssessmentViewModel.getAllAssessments().observe(this, new Observer<List<AssessmentEntity>>() {
             @Override
             public void onChanged(@Nullable final List<AssessmentEntity> assessments) {
@@ -124,24 +184,26 @@ public class EditAssessmentActivity extends AppCompatActivity {
                 }
             }
         });
-        //save edited course button
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
                 String name = mEditAssessmentName.getText().toString();
+                String status = mEditAssessmentStatus.getText().toString();
+                String start = mEditAssessmentStartDate.getText().toString();
+                String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
-                String alert = mEditAssessmentAlertDate.getText().toString();
+                String alertDue = mEditAssessmentAlertDueDate.getText().toString();
 
                 replyIntent.putExtra("assessmentName", name);
                 replyIntent.putExtra("assessmentDueDate", due);
-                replyIntent.putExtra("assessmentAlertDate", alert);
+                replyIntent.putExtra("assessmentStartDate", start);
 
                 if (getIntent().getStringExtra("assessmentName") != null) {
                     int id = getIntent().getIntExtra("assessmentId", 0);
                     int courseId = getIntent().getIntExtra("assessmentCourseId", 0);
-                    AssessmentEntity updatedAssessment = new AssessmentEntity(id, courseId, name, DateConverter.toDate(due), DateConverter.toDate(alert));
+                    AssessmentEntity updatedAssessment = new AssessmentEntity(id, courseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                     mAssessmentViewModel.updateAssessment(updatedAssessment);
                 }
                 setResult(RESULT_OK, replyIntent);
@@ -157,17 +219,17 @@ public class EditAssessmentActivity extends AppCompatActivity {
                 assessmentId[0] = getIntent().getExtras().getInt("assessmentId");
                 int assessmentCourseId = getIntent().getExtras().getInt("assessmentCourseId");
                 String name = mEditAssessmentName.getText().toString();
+                String status = mEditAssessmentStatus.getText().toString();
+                String start = mEditAssessmentStartDate.getText().toString();
+                String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
-                String alert = mEditAssessmentAlertDate.getText().toString();
+                String alertDue = mEditAssessmentAlertDueDate.getText().toString();
 
-                if (filteredAssessments.size() > 1) {
-                    AssessmentEntity deletingAssessment = new AssessmentEntity(assessmentId[0], assessmentCourseId, name, DateConverter.toDate(due), DateConverter.toDate(alert));
-                    mAssessmentViewModel.deleteAssessment(deletingAssessment);
+                AssessmentEntity deletingAssessment = new AssessmentEntity(assessmentId[0], assessmentCourseId, name, status, DateConverter.toDate(due), DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(alertDue));
+                mAssessmentViewModel.deleteAssessment(deletingAssessment);
 
-                    Toast.makeText(getApplicationContext(), name + " Was Deleted!", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Could not delete the assessment. You must have at least one assessment per course.", Toast.LENGTH_LONG).show();
-                }
+                Toast.makeText(getApplicationContext(), name + " Was Deleted!", Toast.LENGTH_LONG).show();
+
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }

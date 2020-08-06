@@ -283,7 +283,7 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("courseId",0), data.getStringExtra("assessmentName"), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDate")));
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("courseId",0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), DateConverter.toDate(data.getStringExtra("startDate")),  DateConverter.toDate(data.getStringExtra("alertStartDate")), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDueDate")));
             mAssessmentViewModel.insertAssessment(assessment);
         }
     }

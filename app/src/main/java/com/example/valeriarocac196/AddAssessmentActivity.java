@@ -3,7 +3,6 @@ package com.example.valeriarocac196;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,9 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Database.TrackerManagementDatabase;
 import com.example.valeriarocac196.Entities.AssessmentEntity;
-import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.UI.AssessmentAdapter;
-import com.example.valeriarocac196.UI.CourseAdapter;
 import com.example.valeriarocac196.ViewModel.AssessmentViewModel;
 
 import java.text.SimpleDateFormat;
@@ -33,11 +30,16 @@ public class AddAssessmentActivity extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance();
     public SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     public DatePickerDialog.OnDateSetListener assessmentDueDateListener;
-    public DatePickerDialog.OnDateSetListener alarmDateListener;
+    public DatePickerDialog.OnDateSetListener alarmDueDateListener;
+    public DatePickerDialog.OnDateSetListener assessmentStartDateListener;
+    public DatePickerDialog.OnDateSetListener alarmStartDateListener;
 
     private EditText mEditAssessmentName;
+    private EditText mEditAssessmentStatus;
     private EditText mEditAssessmentDueDate;
-    private EditText mEditAssessmentAlertDate;
+    private EditText mEditAssessmentAlertDueDate;
+    private EditText mEditAssessmentStartDate;
+    private EditText mEditAssessmentAlertStartDate;
     private int position;
     TrackerManagementDatabase db;
 
@@ -55,8 +57,11 @@ public class AddAssessmentActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mEditAssessmentName = findViewById(R.id.editAssessmentName);
+        mEditAssessmentStatus = findViewById(R.id.editAssessmentStatus);
         mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
-        mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
+        mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
+        mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
+        mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
 
         // assessment DatePickerDialog due date listener and functionality
         DatePickerDialog.OnDateSetListener dueDate = (view, year, month, dayOfMonth) -> {
@@ -78,31 +83,77 @@ public class AddAssessmentActivity extends AppCompatActivity {
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
                 .get(Calendar.DAY_OF_MONTH)).show());
         assessmentDueDateListener = (view, year, month, dayOfMonth) -> {
-            String sDate = month + "/" + dayOfMonth + "/" + year;
-            mEditAssessmentDueDate.setText(sDate);
+            String dDate = month + "/" + dayOfMonth + "/" + year;
+            mEditAssessmentDueDate.setText(dDate);
         };
-        // assessment DatePickerDialog alert date listener and functionality
-        DatePickerDialog.OnDateSetListener alertDate = (view, year, month, dayOfMonth) -> {
+        // assessment DatePickerDialog alert due date listener and functionality
+        DatePickerDialog.OnDateSetListener alertDueDate = (view, year, month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditAssessmentDueDate, calendar);
         };
-        mEditAssessmentAlertDate = findViewById(R.id.editAssessmentAlertDate);
-        mEditAssessmentAlertDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
+        mEditAssessmentAlertDueDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateConverter.updateDateText(mEditAssessmentAlertDate, calendar);
+                DateConverter.updateDateText(mEditAssessmentAlertDueDate, calendar);
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
                 .get(Calendar.DAY_OF_MONTH)).show());
-        alarmDateListener = (view, year, month, dayOfMonth) -> {
+        alarmDueDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
-            mEditAssessmentAlertDate.setText(aDate);
+            mEditAssessmentAlertDueDate.setText(aDate);
+        };
+        // assessment DatePickerDialog start date listener and functionality
+        DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+        };
+        mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
+        mEditAssessmentStartDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+            }
+        }, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                .get(Calendar.DAY_OF_MONTH)).show());
+        assessmentStartDateListener = (view, year, month, dayOfMonth) -> {
+            String dDate = month + "/" + dayOfMonth + "/" + year;
+            mEditAssessmentStartDate.setText(dDate);
+        };
+        // assessment DatePickerDialog alert due date listener and functionality
+        DatePickerDialog.OnDateSetListener alertStartDate = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+        };
+        mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
+        mEditAssessmentAlertStartDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateConverter.updateDateText(mEditAssessmentAlertStartDate, calendar);
+            }
+        }, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                .get(Calendar.DAY_OF_MONTH)).show());
+        alarmStartDateListener = (view, year, month, dayOfMonth) -> {
+            String aDate = month + "/" + dayOfMonth + "/" + year;
+            mEditAssessmentAlertStartDate.setText(aDate);
         };
         //save new course button
         final AssessmentAdapter adapter = new AssessmentAdapter(this);
@@ -118,16 +169,18 @@ public class AddAssessmentActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String name = mEditAssessmentName.getText().toString();
+                String status = mEditAssessmentStatus.getText().toString();
+                String start = mEditAssessmentStartDate.getText().toString();
+                String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
-                String alert = mEditAssessmentAlertDate.getText().toString();
+                String alertDue = mEditAssessmentAlertDueDate.getText().toString();
                 Intent intent = getIntent();
                 Bundle extras = intent.getExtras();
                 Integer assessmentCourseId = extras.getInt("assessmentCourseId");
 
-                AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, assessmentCourseId, name, DateConverter.toDate(due), DateConverter.toDate(alert));
+                AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                 mAssessmentViewModel.insertAssessment(tempAssessment);
                 mAssessmentViewModel.getAllAssessments();
-
 
                 finish();
             }
@@ -141,7 +194,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, getIntent().getIntExtra("assessmentCourseId", 0), data.getStringExtra("assessmentName"), DateConverter.toDate(data.getStringExtra("assessmentDueDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertDate")));
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, getIntent().getIntExtra("assessmentCourseId", 0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), DateConverter.toDate(data.getStringExtra("assessmentStartDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertStartDate")), DateConverter.toDate(data.getStringExtra("assessmentDueDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertDueDate")));
             mAssessmentViewModel.insertAssessment(assessment);
         }
     }

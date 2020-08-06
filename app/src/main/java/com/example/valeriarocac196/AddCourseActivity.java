@@ -179,10 +179,6 @@ public class AddCourseActivity extends AppCompatActivity {
                 CourseEntity tempCourse = new CourseEntity(mCourseViewModel.lastID()+1, courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(end), status, mentorName, mentorPhone, mentorEmail, notes, DateConverter.toDate(alert));
                 mCourseViewModel.insertCourse(tempCourse);
                 mCourseViewModel.getAllCourses();
-                //creates an associated default assessment for each new course
-                AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, tempCourse.getCourseId(), "Default", DateConverter.toDate(start), DateConverter.toDate(start));
-                mAssessmentViewModel.insertAssessment(tempAssessment);
-                mAssessmentViewModel.getAllAssessments();
 
                 Toast.makeText(getApplicationContext(), "Course " + name + " Added!", Toast.LENGTH_LONG).show();
                 finish();
