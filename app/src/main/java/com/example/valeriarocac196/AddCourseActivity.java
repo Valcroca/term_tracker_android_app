@@ -18,7 +18,9 @@ import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Database.TrackerManagementDatabase;
 import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
+import com.example.valeriarocac196.UI.AssessmentAdapter;
 import com.example.valeriarocac196.UI.CourseAdapter;
+import com.example.valeriarocac196.ViewModel.AssessmentViewModel;
 import com.example.valeriarocac196.ViewModel.CourseViewModel;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +30,7 @@ import java.util.List;
 
 public class AddCourseActivity extends AppCompatActivity {
     private CourseViewModel mCourseViewModel;
+    private AssessmentViewModel mAssessmentViewModel;
 
     Calendar calendar = Calendar.getInstance();
     public SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -52,6 +55,7 @@ public class AddCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        mAssessmentViewModel = new ViewModelProvider(this).get(AssessmentViewModel.class);
         db = TrackerManagementDatabase.getDatabase(getApplicationContext());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -147,6 +151,13 @@ public class AddCourseActivity extends AppCompatActivity {
                 adapter.setCourses(courses);
             }
         });
+        final AssessmentAdapter adapter2 = new AssessmentAdapter(this);
+        mAssessmentViewModel.getAllAssessments().observe(this, new Observer<List<AssessmentEntity>>() {
+            @Override
+            public void onChanged(List<AssessmentEntity> assessments) {
+                adapter2.setAssessments(assessments);
+            }
+        });
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,8 +179,10 @@ public class AddCourseActivity extends AppCompatActivity {
                 CourseEntity tempCourse = new CourseEntity(mCourseViewModel.lastID()+1, courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(end), status, mentorName, mentorPhone, mentorEmail, notes, DateConverter.toDate(alert));
                 mCourseViewModel.insertCourse(tempCourse);
                 mCourseViewModel.getAllCourses();
-                //TODO: create an associated default assessment for each new course
-//                AssessmentEntity tempAssessment = new AssessmentEntity();
+                //creates an associated default assessment for each new course
+                AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, tempCourse.getCourseId(), "Default", DateConverter.toDate(start), DateConverter.toDate(start));
+                mAssessmentViewModel.insertAssessment(tempAssessment);
+                mAssessmentViewModel.getAllAssessments();
 
                 Toast.makeText(getApplicationContext(), "Course " + name + " Added!", Toast.LENGTH_LONG).show();
                 finish();
