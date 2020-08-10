@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddCourseActivity extends AppCompatActivity {
+public class AddCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private CourseViewModel mCourseViewModel;
     private AssessmentViewModel mAssessmentViewModel;
 
@@ -43,7 +46,7 @@ public class AddCourseActivity extends AppCompatActivity {
     private EditText mEditCourseStartAlert;
     private EditText mEditCourseEnd;
     private EditText mEditCourseEndAlert;
-    private EditText mEditCourseStatus;
+    private Spinner mEditCourseStatus;
     private EditText mEditCourseMentorName;
     private EditText mEditCourseMentorPhone;
     private EditText mEditCourseMentorEmail;
@@ -76,7 +79,6 @@ public class AddCourseActivity extends AppCompatActivity {
         mEditCourseMentorPhone = findViewById(R.id.editCourseMentorPhone);
         mEditCourseMentorEmail = findViewById(R.id.editCourseMentorEmail);
         mEditCourseNotes = findViewById(R.id.editCourseNotes);
-
 
         // Course DatePickerDialog start date listener and functionality
         DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {
@@ -170,6 +172,7 @@ public class AddCourseActivity extends AppCompatActivity {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseEndAlert.setText(aDate);
         };
+
         //save new course button
         final CourseAdapter adapter = new CourseAdapter(this);
         mCourseViewModel.getAllCourses().observe(this, new Observer<List<CourseEntity>>() {
@@ -193,7 +196,7 @@ public class AddCourseActivity extends AppCompatActivity {
                 String name = mEditCourseName.getText().toString();
                 String start = mEditCourseStart.getText().toString();
                 String end = mEditCourseEnd.getText().toString();
-                String status = mEditCourseStatus.getText().toString();
+                String status = mEditCourseStatus.getSelectedItem().toString();
                 String mentorName = mEditCourseMentorName.getText().toString();
                 String mentorPhone = mEditCourseMentorPhone.getText().toString();
                 String mentorEmail = mEditCourseMentorEmail.getText().toString();
@@ -212,8 +215,23 @@ public class AddCourseActivity extends AppCompatActivity {
                 finish();
             }
         });
+        // status spinner code
+        Spinner spin = findViewById(R.id.editCourseStatus);
+        ArrayAdapter<String> courseStatusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, statuses);
+        courseStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(courseStatusAdapter);
+        spin.setOnItemSelectedListener(this);
     }
+    //status spinner code
+    String[] statuses = { "plan to take", "dropped", "in-progress", "completed" };
 
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position,long id) {
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO - Custom Code
+    }
     @Override
     public boolean onSupportNavigateUp(){
         onBackPressed();

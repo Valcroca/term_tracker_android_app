@@ -118,7 +118,7 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="78dp" />
 
-    <EditText
+    <Spinner
         android:id="@+id/editCourseStatus"
         android:text="Edit Status"
         android:layout_width="wrap_content"

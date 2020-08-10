@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -33,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class EditCourseActivity extends AppCompatActivity {
+public class EditCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private CourseViewModel mCourseViewModel;
     private AssessmentViewModel mAssessmentViewModel;
@@ -50,7 +53,7 @@ public class EditCourseActivity extends AppCompatActivity {
     private EditText mEditCourseStartAlert;
     private EditText mEditCourseEnd;
     private EditText mEditCourseEndAlert;
-    private EditText mEditCourseStatus;
+    private Spinner mEditCourseStatus;
     private EditText mEditCourseMentorName;
     private EditText mEditCourseMentorPhone;
     private EditText mEditCourseMentorEmail;
@@ -71,6 +74,7 @@ public class EditCourseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
         mEditCourseName = findViewById(R.id.editCourseName);
         mEditCourseStart = findViewById(R.id.editCourseStart);
         mEditCourseStartAlert = findViewById(R.id.editStartAlert);
@@ -86,6 +90,12 @@ public class EditCourseActivity extends AppCompatActivity {
         Date courseEnd;
         Date courseAlertDate;
         final int[] courseId = new int[1];
+        // status spinner code
+        Spinner spin = findViewById(R.id.editCourseStatus);
+        ArrayAdapter<String> courseStatusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, statuses);
+        courseStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(courseStatusAdapter);
+        spin.setOnItemSelectedListener(this);
 
         if (getIntent().getStringExtra("courseName") != null) {
             //setting course data, passed from adapter, on edit fields
@@ -99,7 +109,8 @@ public class EditCourseActivity extends AppCompatActivity {
             mEditCourseEnd.setText(endString);
             String endAlertString = getIntent().getStringExtra("courseEndAlert");
             mEditCourseEndAlert.setText(endAlertString);
-            mEditCourseStatus.setText(getIntent().getStringExtra("courseStatus"));
+            int spinnerPosition = courseStatusAdapter.getPosition(getIntent().getStringExtra("courseStatus"));
+            mEditCourseStatus.setSelection(spinnerPosition);
             mEditCourseMentorName.setText(getIntent().getStringExtra("courseMentorName"));
             mEditCourseMentorPhone.setText(getIntent().getStringExtra("courseMentorPhone"));
             mEditCourseMentorEmail.setText(getIntent().getStringExtra("courseMentorEmail"));
@@ -239,7 +250,7 @@ public class EditCourseActivity extends AppCompatActivity {
                 String name = mEditCourseName.getText().toString();
                 String start = mEditCourseStart.getText().toString();
                 String end = mEditCourseEnd.getText().toString();
-                String status = mEditCourseStatus.getText().toString();
+                String status = mEditCourseStatus.getSelectedItem().toString();
                 String mentorName = mEditCourseMentorName.getText().toString();
                 String mentorPhone = mEditCourseMentorPhone.getText().toString();
                 String mentorEmail = mEditCourseMentorEmail.getText().toString();
@@ -280,7 +291,7 @@ public class EditCourseActivity extends AppCompatActivity {
                 String name = mEditCourseName.getText().toString();
                 String start = mEditCourseStart.getText().toString();
                 String end = mEditCourseEnd.getText().toString();
-                String status = mEditCourseStatus.getText().toString();
+                String status = mEditCourseStatus.getSelectedItem().toString();
                 String mentorName = mEditCourseMentorName.getText().toString();
                 String mentorPhone = mEditCourseMentorPhone.getText().toString();
                 String mentorEmail = mEditCourseMentorEmail.getText().toString();
@@ -299,8 +310,17 @@ public class EditCourseActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
 
+    }
+    //status spinner code
+    String[] statuses = { "plan to take", "dropped", "in-progress", "completed" };
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO - Custom Code
+    }
     @Override
     public boolean onSupportNavigateUp(){
         onBackPressed();
