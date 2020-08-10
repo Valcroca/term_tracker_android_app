@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -158,7 +159,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditAssessmentAlertStartDate.setText(aDate);
         };
-        //save new course button
+        //save new assessment button
         final AssessmentAdapter adapter = new AssessmentAdapter(this);
         mAssessmentViewModel.getAllAssessments().observe(this, new Observer<List<AssessmentEntity>>() {
             @Override
@@ -182,10 +183,12 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                 Integer assessmentCourseId = extras.getInt("assessmentCourseId");
 
                 AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
+
                 mAssessmentViewModel.insertAssessment(tempAssessment);
                 mAssessmentViewModel.getAllAssessments();
 
                 finish();
+
             }
         });
         // status spinner code

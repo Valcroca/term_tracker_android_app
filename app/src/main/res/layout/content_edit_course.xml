@@ -243,13 +243,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/associated_assessments"
-        android:layout_width="414dp"
-
+        android:layout_width="411dp"
+        android:layout_height="216dp"
         android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_assessments"
-
-        tools:listitem="@layout/course_list_item"
-        android:layout_height="130dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:listitem="@layout/course_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

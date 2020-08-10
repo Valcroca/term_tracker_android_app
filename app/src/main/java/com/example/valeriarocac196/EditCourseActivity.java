@@ -215,9 +215,14 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EditCourseActivity.this, AddAssessmentActivity.class);
-                intent.putExtra("assessmentCourseId", courseId[0]);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                //limit 5 assessments per course
+                if (filteredAssessments.size() <= 4) {
+                    Intent intent = new Intent(EditCourseActivity.this, AddAssessmentActivity.class);
+                    intent.putExtra("assessmentCourseId", courseId[0]);
+                    startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                } else {
+                    Toast.makeText(getApplicationContext(), "This course already has reached the 5 assessments limit! ", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

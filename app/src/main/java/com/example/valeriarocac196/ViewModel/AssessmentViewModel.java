@@ -24,7 +24,7 @@ public class AssessmentViewModel extends AndroidViewModel {
         mAssociatedAssessments=mRepository.getAllAssociatedAssessments(courseId);
     }
     public LiveData<List<AssessmentEntity>> getAllAssociatedAssessments(int courseId){
-        return mRepository.getAllAssociatedAssessments(courseId);
+        return mAllAssessments;
     }
     public LiveData<List<AssessmentEntity>> getAllAssessments(){
         return mAllAssessments;
