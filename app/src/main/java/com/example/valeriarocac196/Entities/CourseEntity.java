@@ -23,38 +23,39 @@ public class CourseEntity {
     private int courseId;
     private int courseTermId;
     private String name, status, mentorName, mentorPhone, mentorEmail, notes;
-    private Date startDate;
-    private Date endDate;
-    private Date courseAlertDate;
+    private Date startDate, startDateAlert, endDate, endDateAlert;
 
-    public CourseEntity(int courseId, int courseTermId, String name, Date startDate, Date endDate, String status, String mentorName, String mentorPhone, String mentorEmail, String notes, Date courseAlertDate) {
+    public CourseEntity(int courseId, int courseTermId, String name, Date startDate, Date startDateAlert, Date endDate, Date endDateAlert, String status, String mentorName, String mentorPhone, String mentorEmail, String notes) {
         this.courseId = courseId;
         this.courseTermId = courseTermId;
         this.name = name;
         this.startDate = startDate;
+        this.startDateAlert = startDateAlert;
         this.endDate = endDate;
+        this.endDateAlert = endDateAlert;
         this.status = status;
         this.mentorName = mentorName;
         this.mentorPhone = mentorPhone;
         this.mentorEmail = mentorEmail;
         this.notes = notes;
-        this.courseAlertDate = courseAlertDate;
+
     }
 
-//    public CourseEntity(int courseTermId, String name, Date startDate, Date endDate, String status, String mentorName, String mentorPhone, String mentorEmail, String notes, Date courseAlertDate) {
-//        this.courseTermId = courseTermId;
-//        this.name = name;
-//        this.startDate = startDate;
-//        this.endDate = endDate;
-//        this.status = status;
-//        this.mentorName = mentorName;
-//        this.mentorPhone = mentorPhone;
-//        this.mentorEmail = mentorEmail;
-//        this.notes = notes;
-//        this.courseAlertDate = courseAlertDate;
-//    }
+    public Date getStartDateAlert() {
+        return startDateAlert;
+    }
 
+    public void setStartDateAlert(Date startDateAlert) {
+        this.startDateAlert = startDateAlert;
+    }
 
+    public Date getEndDateAlert() {
+        return endDateAlert;
+    }
+
+    public void setEndDateAlert(Date endDateAlert) {
+        this.endDateAlert = endDateAlert;
+    }
 
     public int getCourseId() {
         return courseId;
@@ -136,11 +137,4 @@ public class CourseEntity {
         this.endDate = endDate;
     }
 
-    public Date getCourseAlertDate() {
-        return courseAlertDate;
-    }
-
-    public void setCourseAlertDate(Date courseAlertDate) {
-        this.courseAlertDate = courseAlertDate;
-    }
 }

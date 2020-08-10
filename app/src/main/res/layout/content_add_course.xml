@@ -13,99 +13,140 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
-        tools:layout_editor_absoluteX="204dp"
         android:text="Course Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@id/editCourseName"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="204dp" />
 
     <EditText
         android:id="@+id/editCourseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        tools:layout_editor_absoluteX="267dp"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
+        android:layout_marginTop="80dp"
         android:focusable="true"
-        app:layout_constraintTop_toTopOf="parent"
+        android:selectAllOnFocus="true"
         android:text="Edit Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseName"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/courseStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Date"
         android:layout_margin="10dp"
+        android:text="Start Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseStart"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editCourseStart"
-        android:text="Edit Start Date"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:text="Edit Start Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintLeft_toRightOf="@+id/courseStart"
-        app:layout_constraintTop_toBottomOf="@id/editCourseName"/>
+        app:layout_constraintTop_toBottomOf="@id/editCourseName" />
+
+    <TextView
+        android:id="@+id/startAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Start Alert"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@id/courseStart"
+        app:layout_constraintLeft_toRightOf="@+id/editCourseStart"
+        app:layout_constraintTop_toTopOf="@id/courseStart" />
+
+    <EditText
+        android:focusable="false"
+        android:selectAllOnFocus="true"
+        android:textIsSelectable="true"
+        android:id="@+id/editStartAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Edit Start Alert"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@id/editCourseStart"
+        app:layout_constraintLeft_toRightOf="@id/startAlert" />
 
     <TextView
         android:id="@+id/courseEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date"
         android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:text="End Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseEnd"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
 
     <EditText
         android:id="@+id/editCourseEnd"
-        android:text="Edit End Date"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:text="Edit End Date"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintLeft_toRightOf="@+id/courseEnd"
-        app:layout_constraintTop_toBottomOf="@id/editCourseStart"/>
+        app:layout_constraintTop_toBottomOf="@id/editCourseStart" />
+
+    <TextView
+        android:id="@+id/endAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="End Alert"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@+id/courseEnd"
+        app:layout_constraintLeft_toRightOf="@id/editCourseEnd"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editEndAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusableInTouchMode="false"
+        android:text="Edit End Alert"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintBottom_toBottomOf="@id/editCourseEnd"
+        app:layout_constraintLeft_toRightOf="@+id/endAlert" />
 
     <TextView
         android:id="@+id/courseStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Status"
         android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:text="Status"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseStatus"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
 
     <EditText
         android:id="@+id/editCourseStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Status"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
-        android:focusable="true"
         android:layout_margin="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:selectAllOnFocus="true"
+        android:text="Edit Status"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseStatus"
         app:layout_constraintTop_toBottomOf="@id/editCourseEnd" />
 
@@ -113,26 +154,25 @@
         android:id="@+id/courseMentorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mentor Name"
         android:layout_margin="10dp"
+        android:text="Mentor Name"
 
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorName"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
 
     <EditText
         android:id="@+id/editCourseMentorName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Mentor Name"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
-        android:focusable="true"
         android:layout_margin="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:selectAllOnFocus="true"
+        android:text="Edit Mentor Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorName"
         app:layout_constraintTop_toBottomOf="@id/editCourseStatus" />
 
@@ -140,25 +180,24 @@
         android:id="@+id/courseMentorPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mentor Phone"
         android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:text="Mentor Phone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorPhone"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
 
     <EditText
         android:id="@+id/editCourseMentorPhone"
-        android:text="Edit Mentor Phone"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:selectAllOnFocus="true"
+        android:text="Edit Mentor Phone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorPhone"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorName" />
 
@@ -166,25 +205,24 @@
         android:id="@+id/courseMentorEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mentor Email"
         android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:text="Mentor Email"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorEmail"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
     <EditText
         android:id="@+id/editCourseMentorEmail"
-        android:text="Edit Mentor Email"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:selectAllOnFocus="true"
+        android:text="Edit Mentor Email"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorEmail"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorPhone" />
 
@@ -192,50 +230,26 @@
         android:id="@+id/courseNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notes"
         android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
+        android:text="Notes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@+id/editCourseNotes"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp" />
 
     <EditText
         android:id="@+id/editCourseNotes"
         android:layout_width="wrap_content"
-        android:text="Edit Notes"
-        android:textIsSelectable="true"
-        android:selectAllOnFocus="true"
-        android:focusable="true"
-        android:layout_margin="10dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="true"
         android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
+        android:selectAllOnFocus="true"
+        android:text="Edit Notes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textIsSelectable="true"
         app:layout_constraintLeft_toRightOf="@+id/courseNotes"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorEmail" />
-
-    <TextView
-        android:id="@+id/courseAlertDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alert Date"
-        android:layout_margin="10dp"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="112dp"
-        app:layout_constraintBottom_toBottomOf="@+id/editCourseAlertDate"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/editCourseAlertDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit Alert Date"
-        android:layout_margin="10dp"
-        android:focusableInTouchMode="false"
-        tools:layout_editor_absoluteX="210dp"
-        tools:layout_editor_absoluteY="115dp"
-        app:layout_constraintLeft_toRightOf="@+id/courseAlertDate"
-        app:layout_constraintTop_toBottomOf="@id/editCourseNotes" />
 
     <Button
         android:id="@+id/button_save"
@@ -243,7 +257,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="Save"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseAlertDate"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseNotes"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

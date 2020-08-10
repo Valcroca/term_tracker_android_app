@@ -219,7 +219,7 @@ public class EditTermActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseEnd")), getIntent().getStringExtra("status"), getIntent().getStringExtra("mentorName"), getIntent().getStringExtra("mentorPhone"), getIntent().getStringExtra("mentorEmail"), getIntent().getStringExtra("notes"), DateConverter.toDate(data.getStringExtra("courseAlertDate")));
+            CourseEntity course = new CourseEntity(mCourseViewModel.lastID()+1, getIntent().getIntExtra("termId",0), data.getStringExtra("courseName"), DateConverter.toDate(data.getStringExtra("courseStart")),  DateConverter.toDate(data.getStringExtra("courseStartAlert")),  DateConverter.toDate(data.getStringExtra("courseEnd")), DateConverter.toDate(data.getStringExtra("courseEndAlert")),  getIntent().getStringExtra("status"), getIntent().getStringExtra("mentorName"), getIntent().getStringExtra("mentorPhone"), getIntent().getStringExtra("mentorEmail"), getIntent().getStringExtra("notes"));
             mCourseViewModel.insertCourse(course);
         }
     }

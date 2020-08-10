@@ -42,13 +42,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("courseTermId", current.getCourseTermId());
                     intent.putExtra("courseName", current.getName());
                     intent.putExtra("courseStart", DateConverter.formatDateString(current.getStartDate().toString()));
+                    intent.putExtra("courseStartAlert", DateConverter.formatDateString(current.getStartDateAlert().toString()));
                     intent.putExtra("courseEnd", DateConverter.formatDateString(current.getEndDate().toString()));
+                    intent.putExtra("courseEndAlert", DateConverter.formatDateString(current.getEndDateAlert().toString()));
                     intent.putExtra("courseStatus", current.getStatus());
                     intent.putExtra("courseMentorName", current.getMentorName());
                     intent.putExtra("courseMentorPhone", current.getMentorPhone());
                     intent.putExtra("courseMentorEmail", current.getMentorEmail());
                     intent.putExtra("courseNotes", current.getNotes());
-                    intent.putExtra("courseAlertDate", DateConverter.formatDateString(current.getCourseAlertDate().toString()));
                     intent.putExtra("position", position);
                     context.startActivity(intent);
                 }

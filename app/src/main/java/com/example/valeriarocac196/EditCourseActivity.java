@@ -42,17 +42,19 @@ public class EditCourseActivity extends AppCompatActivity {
     public SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     public DatePickerDialog.OnDateSetListener courseStartListener;
     public DatePickerDialog.OnDateSetListener courseEndListener;
-    public DatePickerDialog.OnDateSetListener courseAlertDateListener;
+    public DatePickerDialog.OnDateSetListener courseStartAlertDateListener;
+    public DatePickerDialog.OnDateSetListener courseEndAlertDateListener;
 
     private EditText mEditCourseName;
     private EditText mEditCourseStart;
+    private EditText mEditCourseStartAlert;
     private EditText mEditCourseEnd;
+    private EditText mEditCourseEndAlert;
     private EditText mEditCourseStatus;
     private EditText mEditCourseMentorName;
     private EditText mEditCourseMentorPhone;
     private EditText mEditCourseMentorEmail;
     private EditText mEditCourseNotes;
-    private EditText mEditCourseAlertDate;
     private int position;
     List<AssessmentEntity> filteredAssessments = new ArrayList<>();
 
@@ -71,13 +73,14 @@ public class EditCourseActivity extends AppCompatActivity {
 
         mEditCourseName = findViewById(R.id.editCourseName);
         mEditCourseStart = findViewById(R.id.editCourseStart);
+        mEditCourseStartAlert = findViewById(R.id.editStartAlert);
         mEditCourseEnd = findViewById(R.id.editCourseEnd);
+        mEditCourseEndAlert = findViewById(R.id.editEndAlert);
         mEditCourseStatus = findViewById(R.id.editCourseStatus);
         mEditCourseMentorName = findViewById(R.id.editCourseMentorName);
         mEditCourseMentorPhone = findViewById(R.id.editCourseMentorPhone);
         mEditCourseMentorEmail = findViewById(R.id.editCourseMentorEmail);
         mEditCourseNotes = findViewById(R.id.editCourseNotes);
-        mEditCourseAlertDate = findViewById(R.id.editCourseAlertDate);
 
         Date courseStart;
         Date courseEnd;
@@ -90,19 +93,18 @@ public class EditCourseActivity extends AppCompatActivity {
             mEditCourseName.setText(getIntent().getStringExtra("courseName"));
             String startString = getIntent().getStringExtra("courseStart");
             mEditCourseStart.setText(startString);
+            String startAlertString = getIntent().getStringExtra("courseStartAlert");
+            mEditCourseStartAlert.setText(startAlertString);
             String endString = getIntent().getStringExtra("courseEnd");
             mEditCourseEnd.setText(endString);
+            String endAlertString = getIntent().getStringExtra("courseEndAlert");
+            mEditCourseEndAlert.setText(endAlertString);
             mEditCourseStatus.setText(getIntent().getStringExtra("courseStatus"));
             mEditCourseMentorName.setText(getIntent().getStringExtra("courseMentorName"));
             mEditCourseMentorPhone.setText(getIntent().getStringExtra("courseMentorPhone"));
             mEditCourseMentorEmail.setText(getIntent().getStringExtra("courseMentorEmail"));
             mEditCourseNotes.setText(getIntent().getStringExtra("courseNotes"));
-            String alertDateString = getIntent().getStringExtra("courseAlertDate");
-            mEditCourseAlertDate.setText(alertDateString);
-            //dates to abbreviated format
-//            courseStart = DateConverter.toDate(startString);
-//            courseEnd = DateConverter.toDate(endString);
-//            courseAlertDate = DateConverter.toDate(alertDateString);
+
         }
         // Course DatePickerDialog start date listener and functionality
         DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {
@@ -150,28 +152,51 @@ public class EditCourseActivity extends AppCompatActivity {
             String sDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseStart.setText(sDate);
         };
-        // Course DatePickerDialog alert date listener and functionality
-        DatePickerDialog.OnDateSetListener alertDate = (view, year, month, dayOfMonth) -> {
+        // Course DatePickerDialog start alert date listener and functionality
+        DatePickerDialog.OnDateSetListener startAlert = (view, year, month, dayOfMonth) -> {
             calendar.set(Calendar.YEAR, year);
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            DateConverter.updateDateText(mEditCourseStart, calendar);
+            DateConverter.updateDateText(mEditCourseStartAlert, calendar);
         };
-        mEditCourseAlertDate = findViewById(R.id.editCourseAlertDate);
-        mEditCourseAlertDate.setOnClickListener(v -> new DatePickerDialog(EditCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
+        mEditCourseStartAlert = findViewById(R.id.editStartAlert);
+        mEditCourseStartAlert.setOnClickListener(v -> new DatePickerDialog(EditCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                DateConverter.updateDateText(mEditCourseStart, calendar);
+                DateConverter.updateDateText(mEditCourseStartAlert, calendar);
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
                 .get(Calendar.DAY_OF_MONTH)).show());
-        courseAlertDateListener = (view, year, month, dayOfMonth) -> {
+        courseStartAlertDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
-            mEditCourseAlertDate.setText(aDate);
+            mEditCourseStartAlert.setText(aDate);
+        };
+        // Course DatePickerDialog end alert date listener and functionality
+        DatePickerDialog.OnDateSetListener endAlert = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            DateConverter.updateDateText(mEditCourseEndAlert, calendar);
+        };
+        mEditCourseEndAlert = findViewById(R.id.editEndAlert);
+        mEditCourseEndAlert.setOnClickListener(v -> new DatePickerDialog(EditCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                DateConverter.updateDateText(mEditCourseEndAlert, calendar);
+            }
+        }, calendar
+                .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
+                .get(Calendar.DAY_OF_MONTH)).show());
+        courseEndAlertDateListener = (view, year, month, dayOfMonth) -> {
+            String aDate = month + "/" + dayOfMonth + "/" + year;
+            mEditCourseEndAlert.setText(aDate);
         };
 
         //add assessment button
@@ -219,7 +244,8 @@ public class EditCourseActivity extends AppCompatActivity {
                 String mentorPhone = mEditCourseMentorPhone.getText().toString();
                 String mentorEmail = mEditCourseMentorEmail.getText().toString();
                 String notes = mEditCourseNotes.getText().toString();
-                String alert = mEditCourseAlertDate.getText().toString();
+                String alertStart = mEditCourseStartAlert.getText().toString();
+                String alertEnd = mEditCourseEndAlert.getText().toString();
 
                 replyIntent.putExtra("courseName", name);
                 replyIntent.putExtra("courseStart", start);
@@ -229,11 +255,12 @@ public class EditCourseActivity extends AppCompatActivity {
                 replyIntent.putExtra("mentorPhone", mentorPhone);
                 replyIntent.putExtra("mentorEmail", mentorEmail);
                 replyIntent.putExtra("notes", notes);
-                replyIntent.putExtra("courseAlertDate", alert);
+                replyIntent.putExtra("courseStartAlert", alertStart);
+                replyIntent.putExtra("courseEndAlert", alertEnd);
                 if (getIntent().getStringExtra("courseName") != null) {
                     int id = getIntent().getIntExtra("courseId", 0);
                     int termId = getIntent().getIntExtra("courseTermId", 0);
-                    CourseEntity updatedCourse = new CourseEntity(id, termId, name, DateConverter.toDate(start), DateConverter.toDate(end), status, mentorName, mentorPhone, mentorEmail, notes, DateConverter.toDate(alert));
+                    CourseEntity updatedCourse = new CourseEntity(id, termId, name, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(end), DateConverter.toDate(alertEnd), status, mentorName, mentorPhone, mentorEmail, notes);
                     mCourseViewModel.updateCourse(updatedCourse);
                 }
 
@@ -258,9 +285,10 @@ public class EditCourseActivity extends AppCompatActivity {
                 String mentorPhone = mEditCourseMentorPhone.getText().toString();
                 String mentorEmail = mEditCourseMentorEmail.getText().toString();
                 String notes = mEditCourseNotes.getText().toString();
-                String alertDate = mEditCourseAlertDate.getText().toString();
+                String alertStart = mEditCourseStartAlert.getText().toString();
+                String alertEnd = mEditCourseEndAlert.getText().toString();
                 if (filteredAssessments.isEmpty()) {
-                    CourseEntity deletingCourse = new CourseEntity(courseId[0], courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(end), status, mentorName, mentorPhone, mentorEmail, notes, DateConverter.toDate(alertDate));
+                    CourseEntity deletingCourse = new CourseEntity(courseId[0], courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(end), DateConverter.toDate(alertEnd), status, mentorName, mentorPhone, mentorEmail, notes);
                     mCourseViewModel.deleteCourse(deletingCourse);
 
                     Toast.makeText(getApplicationContext(), name + " Was Deleted!", Toast.LENGTH_LONG).show();
