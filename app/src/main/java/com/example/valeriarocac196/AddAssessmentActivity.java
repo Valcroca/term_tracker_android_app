@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-public class AddAssessmentActivity extends AppCompatActivity {
+public class AddAssessmentActivity extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
     private AssessmentViewModel mAssessmentViewModel;
 
     Calendar calendar = Calendar.getInstance();
@@ -35,7 +38,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
     public DatePickerDialog.OnDateSetListener alarmStartDateListener;
 
     private EditText mEditAssessmentName;
-    private EditText mEditAssessmentStatus;
+    private Spinner mEditAssessmentStatus;
     private EditText mEditAssessmentDueDate;
     private EditText mEditAssessmentAlertDueDate;
     private EditText mEditAssessmentStartDate;
@@ -169,7 +172,7 @@ public class AddAssessmentActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String name = mEditAssessmentName.getText().toString();
-                String status = mEditAssessmentStatus.getText().toString();
+                String status = mEditAssessmentStatus.getSelectedItem().toString();
                 String start = mEditAssessmentStartDate.getText().toString();
                 String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
@@ -185,6 +188,21 @@ public class AddAssessmentActivity extends AppCompatActivity {
                 finish();
             }
         });
+        // status spinner code
+        Spinner spin = findViewById(R.id.editAssessmentStatus);
+        ArrayAdapter<String> assessmentStatusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, statuses);
+        assessmentStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(assessmentStatusAdapter);
+        spin.setOnItemSelectedListener(this);
+    }
+    //status spinner code
+    String[] statuses = { "plan to take", "passed", "failed" };
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO - Custom Code
     }
     @Override
     public boolean onSupportNavigateUp(){

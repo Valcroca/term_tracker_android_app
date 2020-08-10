@@ -39,11 +39,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/editAssessmentStatus"
         tools:ignore="MissingConstraints" />
 
-    <EditText
+    <Spinner
         android:id="@+id/editAssessmentStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Status"
         android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"

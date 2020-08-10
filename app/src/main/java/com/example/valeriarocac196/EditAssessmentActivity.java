@@ -4,9 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class EditAssessmentActivity extends AppCompatActivity {
+public class EditAssessmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     private AssessmentViewModel mAssessmentViewModel;
 
@@ -37,7 +40,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
     public DatePickerDialog.OnDateSetListener alarmStartDateListener;
 
     private EditText mEditAssessmentName;
-    private EditText mEditAssessmentStatus;
+    private Spinner mEditAssessmentStatus;
     private EditText mEditAssessmentDueDate;
     private EditText mEditAssessmentAlertDueDate;
     private EditText mEditAssessmentStartDate;
@@ -65,12 +68,19 @@ public class EditAssessmentActivity extends AppCompatActivity {
         mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
 
         final int[] assessmentId = new int[1];
+        // status spinner code
+        Spinner spin = findViewById(R.id.editAssessmentStatus);
+        ArrayAdapter<String> assessmentStatusAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, statuses);
+        assessmentStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(assessmentStatusAdapter);
+        spin.setOnItemSelectedListener(this);
 
         if (getIntent().getStringExtra("assessmentName") != null) {
             //setting assessment data, passed from adapter, on edit fields
             assessmentId[0] = getIntent().getExtras().getInt("assessmentId");
             mEditAssessmentName.setText(getIntent().getStringExtra("assessmentName"));
-            mEditAssessmentStatus.setText(getIntent().getStringExtra("assessmentStatus"));
+            int spinnerPosition = assessmentStatusAdapter.getPosition(getIntent().getStringExtra("courseStatus"));
+            mEditAssessmentStatus.setSelection(spinnerPosition);
             String dueDateString = (String) getIntent().getExtras().get("assessmentDueDate");
             mEditAssessmentDueDate.setText(dueDateString);
             String alertDueDateString = (String) getIntent().getExtras().get("assessmentAlertDueDate");
@@ -190,7 +200,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent replyIntent = new Intent();
                 String name = mEditAssessmentName.getText().toString();
-                String status = mEditAssessmentStatus.getText().toString();
+                String status = mEditAssessmentStatus.getSelectedItem().toString();
                 String start = mEditAssessmentStartDate.getText().toString();
                 String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
@@ -219,7 +229,7 @@ public class EditAssessmentActivity extends AppCompatActivity {
                 assessmentId[0] = getIntent().getExtras().getInt("assessmentId");
                 int assessmentCourseId = getIntent().getExtras().getInt("assessmentCourseId");
                 String name = mEditAssessmentName.getText().toString();
-                String status = mEditAssessmentStatus.getText().toString();
+                String status = mEditAssessmentStatus.getSelectedItem().toString();
                 String start = mEditAssessmentStartDate.getText().toString();
                 String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
@@ -233,10 +243,17 @@ public class EditAssessmentActivity extends AppCompatActivity {
                 setResult(RESULT_OK, replyIntent);
                 finish();
             }
-
         });
     }
-
+    //status spinner code
+    String[] statuses = { "plan to take", "passed", "failed" };
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO - Custom Code
+    }
     @Override
     public boolean onSupportNavigateUp(){
         onBackPressed();
