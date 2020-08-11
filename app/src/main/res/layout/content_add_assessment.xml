@@ -62,6 +62,7 @@
 
     <EditText
         android:id="@+id/editAssessmentDueDate"
+        android:text="Edit Due Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -82,6 +83,7 @@
 
     <EditText
         android:id="@+id/editAssessmentAlertDueDate"
+        android:text="Edit Due Date Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -102,6 +104,7 @@
 
     <EditText
         android:id="@+id/editAssessmentStartDate"
+        android:text="Edit Start Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -122,6 +125,7 @@
 
     <EditText
         android:id="@+id/editAssessmentAlertStartDate"
+        android:text="Edit Start Date Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
