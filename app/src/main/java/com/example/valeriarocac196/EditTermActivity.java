@@ -166,21 +166,23 @@ public class EditTermActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent replyIntent = new Intent();
-                String title = mEditTermTitle.getText().toString();
-                String start = mEditTermStart.getText().toString();
-                String end = mEditTermEnd.getText().toString();
+                if (passesValidations()) {
+                    Intent replyIntent = new Intent();
+                    String title = mEditTermTitle.getText().toString();
+                    String start = mEditTermStart.getText().toString();
+                    String end = mEditTermEnd.getText().toString();
 
-                replyIntent.putExtra("termTitle", title);
-                replyIntent.putExtra("termStart", start);
-                replyIntent.putExtra("termEnd", end);
-                if (getIntent().getStringExtra("termTitle") != null) {
+                    replyIntent.putExtra("termTitle", title);
+                    replyIntent.putExtra("termStart", start);
+                    replyIntent.putExtra("termEnd", end);
+
                     int id = getIntent().getIntExtra("termId", 0);
                     TermEntity updatedTerm = new TermEntity(id, title, DateConverter.toDate(start), DateConverter.toDate(end), false);
                     mTermViewModel.updateTerm(updatedTerm);
+
+                    setResult(RESULT_OK, replyIntent);
+                    finish();
                 }
-                setResult(RESULT_OK, replyIntent);
-                finish();
             }
         });
 
@@ -207,6 +209,32 @@ public class EditTermActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private boolean passesValidations() {
+        boolean passes = true;
+        String errorMessage = "";
+        String title = mEditTermTitle.getText().toString();
+        Date start = DateConverter.toDate(mEditTermStart.getText().toString());
+        Date end = DateConverter.toDate(mEditTermEnd.getText().toString());
+
+        if (title == null || title.isEmpty()) {
+            errorMessage += "Title cannot be empty.\n";
+        }
+        if (start == null) {
+            errorMessage += "Start date cannot be empty.\n";
+        }
+        if (end == null) {
+            errorMessage += "End date cannot be empty.\n";
+        }
+
+        if (errorMessage.isEmpty())
+            passes = true;
+        else {
+            passes = false;
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        }
+        return passes;
     }
 
     @Override

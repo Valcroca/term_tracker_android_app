@@ -31,7 +31,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Title"
+        android:hint="Title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@id/termTitle"
         tools:ignore="MissingConstraints"
@@ -56,7 +56,7 @@
         android:layout_margin="20dp"
         android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
-        android:text="Start Date"
+        android:hint="Start Date"
         tools:layout_editor_absoluteY="115dp"
         app:layout_constraintLeft_toRightOf="@+id/termStart"
         app:layout_constraintTop_toBottomOf="@id/editTermTitle"/>
@@ -81,7 +81,7 @@
         android:focusableInTouchMode="false"
         tools:layout_editor_absoluteX="210dp"
         tools:layout_editor_absoluteY="115dp"
-        android:text="End Date"
+        android:hint="End Date"
         app:layout_constraintLeft_toRightOf="@+id/termEnd"
         app:layout_constraintTop_toBottomOf="@id/editTermStart"/>
 

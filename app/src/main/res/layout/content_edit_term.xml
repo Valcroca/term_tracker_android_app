@@ -23,7 +23,7 @@
         android:id="@+id/editTermTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Title"
+        android:hint="Edit Title"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="50dp"
         app:layout_constraintLeft_toRightOf="@+id/termTitle"
@@ -41,6 +41,7 @@
 
     <EditText
         android:id="@+id/editTermStart"
+        android:hint="Edit Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -61,6 +62,7 @@
 
     <EditText
         android:id="@+id/editTermEnd"
+        android:hint="Edit End"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"        tools:layout_editor_absoluteX="210dp"

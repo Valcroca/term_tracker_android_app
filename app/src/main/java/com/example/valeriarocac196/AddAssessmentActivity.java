@@ -171,24 +171,22 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (passesValidations()) {
+                    String name = mEditAssessmentName.getText().toString();
+                    String status = mEditAssessmentStatus.getSelectedItem().toString();
+                    String start = mEditAssessmentStartDate.getText().toString();
+                    String alertStart = mEditAssessmentAlertStartDate.getText().toString();
+                    String due = mEditAssessmentDueDate.getText().toString();
+                    String alertDue = mEditAssessmentAlertDueDate.getText().toString();
+                    Intent intent = getIntent();
+                    Bundle extras = intent.getExtras();
+                    Integer assessmentCourseId = extras.getInt("assessmentCourseId");
 
-                String name = mEditAssessmentName.getText().toString();
-                String status = mEditAssessmentStatus.getSelectedItem().toString();
-                String start = mEditAssessmentStartDate.getText().toString();
-                String alertStart = mEditAssessmentAlertStartDate.getText().toString();
-                String due = mEditAssessmentDueDate.getText().toString();
-                String alertDue = mEditAssessmentAlertDueDate.getText().toString();
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                Integer assessmentCourseId = extras.getInt("assessmentCourseId");
-
-                AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
-
-                mAssessmentViewModel.insertAssessment(tempAssessment);
-                mAssessmentViewModel.getAllAssessments();
-
-                finish();
-
+                    AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
+                    mAssessmentViewModel.insertAssessment(tempAssessment);
+                    mAssessmentViewModel.getAllAssessments();
+                    finish();
+                }
             }
         });
         // status spinner code
@@ -197,6 +195,43 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
         assessmentStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(assessmentStatusAdapter);
         spin.setOnItemSelectedListener(this);
+    }
+    private boolean passesValidations() {
+        boolean passes = true;
+        String errorMessage = "";
+        String name = mEditAssessmentName.getText().toString();
+        String status = mEditAssessmentStatus.getSelectedItem().toString();
+        String start = mEditAssessmentStartDate.getText().toString();
+        String alertStart = mEditAssessmentAlertStartDate.getText().toString();
+        String end = mEditAssessmentDueDate.getText().toString();
+        String alertEnd = mEditAssessmentAlertDueDate.getText().toString();
+
+        if (name == null || name.isEmpty()) {
+            errorMessage += "Name cannot be empty.\n";
+        }
+        if (start == null) {
+            errorMessage += "Start date cannot be empty.\n";
+        }
+        if (alertStart == null) {
+            errorMessage += "Alert for Start cannot be empty.\n";
+        }
+        if (end == null) {
+            errorMessage += "Due date cannot be empty.\n";
+        }
+        if (alertEnd == null) {
+            errorMessage += "Alert for Due date cannot be empty.\n";
+        }
+        if (status == null || status.isEmpty()) {
+            errorMessage += "Status cannot be empty.\n";
+        }
+
+        if (errorMessage.isEmpty())
+            passes = true;
+        else {
+            passes = false;
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        }
+        return passes;
     }
     //status spinner code
     String[] statuses = { "plan to take", "passed", "failed" };

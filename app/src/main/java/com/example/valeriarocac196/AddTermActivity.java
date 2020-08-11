@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -124,16 +125,44 @@ public class AddTermActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TermEntity tempTerm1 = new TermEntity( mTermViewModel.lastID()+1, mEditTermTitle.getText().toString(), DateConverter.toDate(mEditTermStart.getText().toString()),  DateConverter.toDate(mEditTermEnd.getText().toString()), false);
-                mTermViewModel.insertTerm(tempTerm1);
-                mTermViewModel.getAllTerms();
-                //go back to term list
-                Intent intent = new Intent(AddTermActivity.this, TermActivity.class);
-                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                if (passesValidations()) {
+                    TermEntity tempTerm1 = new TermEntity(mTermViewModel.lastID() + 1, mEditTermTitle.getText().toString(), DateConverter.toDate(mEditTermStart.getText().toString()), DateConverter.toDate(mEditTermEnd.getText().toString()), false);
+                    mTermViewModel.insertTerm(tempTerm1);
+                    mTermViewModel.getAllTerms();
+                    //go back to term list
+                    Intent intent = new Intent(AddTermActivity.this, TermActivity.class);
+                    startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
+                }
             }
         });
-
     }
+
+    private boolean passesValidations() {
+        boolean passes = true;
+        String errorMessage = "";
+        String title = mEditTermTitle.getText().toString();
+        Date start = DateConverter.toDate(mEditTermStart.getText().toString());
+        Date end = DateConverter.toDate(mEditTermEnd.getText().toString());
+
+        if (title == null || title.isEmpty()) {
+        errorMessage += "Title cannot be empty.\n";
+        }
+        if (start == null) {
+            errorMessage += "Start date cannot be empty.\n";
+        }
+        if (end == null) {
+            errorMessage += "End date cannot be empty.\n";
+        }
+
+        if (errorMessage.isEmpty())
+            passes = true;
+        else {
+            passes = false;
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        }
+        return passes;
+    }
+
     @Override
     public boolean onSupportNavigateUp(){
         onBackPressed();

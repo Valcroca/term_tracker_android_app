@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:selectAllOnFocus="true"
-        android:text="Edit Name"
+        android:hint="Edit Name"
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="50dp"
         app:layout_constraintLeft_toRightOf="@+id/assessmentName"
@@ -42,6 +42,7 @@
 
     <Spinner
         android:id="@+id/editAssessmentStatus"
+        android:hint="Edit Status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -62,7 +63,7 @@
 
     <EditText
         android:id="@+id/editAssessmentDueDate"
-        android:text="Edit Due Date"
+        android:hint="Edit Due Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -83,7 +84,7 @@
 
     <EditText
         android:id="@+id/editAssessmentAlertDueDate"
-        android:text="Edit Due Date Alert"
+        android:hint="Edit Due Date Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -104,7 +105,7 @@
 
     <EditText
         android:id="@+id/editAssessmentStartDate"
-        android:text="Edit Start Date"
+        android:hint="Edit Start Date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"
@@ -125,7 +126,7 @@
 
     <EditText
         android:id="@+id/editAssessmentAlertStartDate"
-        android:text="Edit Start Date Alert"
+        android:hint="Edit Start Date Alert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusableInTouchMode="false"

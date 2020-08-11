@@ -251,37 +251,41 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent replyIntent = new Intent();
-                String name = mEditCourseName.getText().toString();
-                String start = mEditCourseStart.getText().toString();
-                String end = mEditCourseEnd.getText().toString();
-                String status = mEditCourseStatus.getSelectedItem().toString();
-                String mentorName = mEditCourseMentorName.getText().toString();
-                String mentorPhone = mEditCourseMentorPhone.getText().toString();
-                String mentorEmail = mEditCourseMentorEmail.getText().toString();
-                String notes = mEditCourseNotes.getText().toString();
-                String alertStart = mEditCourseStartAlert.getText().toString();
-                String alertEnd = mEditCourseEndAlert.getText().toString();
+                if (passesValidations()) {
+                    Intent replyIntent = new Intent();
+                    String name = mEditCourseName.getText().toString();
+                    String start = mEditCourseStart.getText().toString();
+                    String end = mEditCourseEnd.getText().toString();
+                    String status = mEditCourseStatus.getSelectedItem().toString();
+                    String mentorName = mEditCourseMentorName.getText().toString();
+                    String mentorPhone = mEditCourseMentorPhone.getText().toString();
+                    String mentorEmail = mEditCourseMentorEmail.getText().toString();
+                    String notes = "";
+                    if (mEditCourseNotes.getText() != null) {
+                        notes = mEditCourseNotes.getText().toString();
+                    }
+                    String alertStart = mEditCourseStartAlert.getText().toString();
+                    String alertEnd = mEditCourseEndAlert.getText().toString();
 
-                replyIntent.putExtra("courseName", name);
-                replyIntent.putExtra("courseStart", start);
-                replyIntent.putExtra("courseEnd", end);
-                replyIntent.putExtra("status", status);
-                replyIntent.putExtra("mentorName", mentorName);
-                replyIntent.putExtra("mentorPhone", mentorPhone);
-                replyIntent.putExtra("mentorEmail", mentorEmail);
-                replyIntent.putExtra("notes", notes);
-                replyIntent.putExtra("courseStartAlert", alertStart);
-                replyIntent.putExtra("courseEndAlert", alertEnd);
-                if (getIntent().getStringExtra("courseName") != null) {
+                    replyIntent.putExtra("courseName", name);
+                    replyIntent.putExtra("courseStart", start);
+                    replyIntent.putExtra("courseEnd", end);
+                    replyIntent.putExtra("status", status);
+                    replyIntent.putExtra("mentorName", mentorName);
+                    replyIntent.putExtra("mentorPhone", mentorPhone);
+                    replyIntent.putExtra("mentorEmail", mentorEmail);
+                    replyIntent.putExtra("notes", notes);
+                    replyIntent.putExtra("courseStartAlert", alertStart);
+                    replyIntent.putExtra("courseEndAlert", alertEnd);
+
                     int id = getIntent().getIntExtra("courseId", 0);
                     int termId = getIntent().getIntExtra("courseTermId", 0);
                     CourseEntity updatedCourse = new CourseEntity(id, termId, name, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(end), DateConverter.toDate(alertEnd), status, mentorName, mentorPhone, mentorEmail, notes);
                     mCourseViewModel.updateCourse(updatedCourse);
-                }
 
-                setResult(RESULT_OK, replyIntent);
-                finish();
+                    setResult(RESULT_OK, replyIntent);
+                    finish();
+                }
             }
         });
 
@@ -315,7 +319,55 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                 finish();
             }
         });
+    }
+    private boolean passesValidations() {
+        boolean passes = true;
+        String errorMessage = "";
+        String name = mEditCourseName.getText().toString();
+        String start = mEditCourseStart.getText().toString();
+        String end = mEditCourseEnd.getText().toString();
+        String status = mEditCourseStatus.getSelectedItem().toString();
+        String mentorName = mEditCourseMentorName.getText().toString();
+        String mentorPhone = mEditCourseMentorPhone.getText().toString();
+        String mentorEmail = mEditCourseMentorEmail.getText().toString();
+        String alertStart = mEditCourseStartAlert.getText().toString();
+        String alertEnd = mEditCourseEndAlert.getText().toString();
 
+        if (name == null || name.isEmpty()) {
+            errorMessage += "Name cannot be empty.\n";
+        }
+        if (start == null) {
+            errorMessage += "Start date cannot be empty.\n";
+        }
+        if (alertStart == null) {
+            errorMessage += "Alert for Start cannot be empty.\n";
+        }
+        if (end == null) {
+            errorMessage += "End date cannot be empty.\n";
+        }
+        if (alertEnd == null) {
+            errorMessage += "Alert for End cannot be empty.\n";
+        }
+        if (status == null || status.isEmpty()) {
+            errorMessage += "Status cannot be empty.\n";
+        }
+        if (mentorName == null || mentorName.isEmpty()) {
+            errorMessage += "Mentor Name cannot be empty.\n";
+        }
+        if (mentorPhone == null || mentorPhone.isEmpty()) {
+            errorMessage += "Mentor Phone cannot be empty.\n";
+        }
+        if (mentorEmail == null || mentorEmail.isEmpty()) {
+            errorMessage += "Mentor Email cannot be empty.\n";
+        }
+
+        if (errorMessage.isEmpty())
+            passes = true;
+        else {
+            passes = false;
+            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+        }
+        return passes;
     }
     //status spinner code
     String[] statuses = { "plan to take", "dropped", "in-progress", "completed" };
