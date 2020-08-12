@@ -319,6 +319,21 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                 finish();
             }
         });
+        //Share button
+        final Button shareButton = findViewById(R.id.shareButton);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, mEditCourseNotes.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TITLE, "Notes");
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
     }
     private boolean passesValidations() {
         boolean passes = true;

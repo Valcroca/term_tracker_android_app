@@ -210,6 +210,13 @@
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorEmail"
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="69dp"
+        android:layout_height="35dp"
+        android:text="Share"
+        app:layout_constraintBottom_toBottomOf="@id/editCourseNotes"
+        app:layout_constraintLeft_toRightOf="@id/editCourseNotes" />
 
     <Button
         android:id="@+id/button_save"
