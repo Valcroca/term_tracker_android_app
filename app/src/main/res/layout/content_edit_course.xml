@@ -13,6 +13,7 @@
         android:id="@+id/courseName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:selectAllOnFocus="true"
         android:text="Course Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@id/editCourseName"
@@ -63,6 +64,7 @@
         android:id="@+id/editStartAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusableInTouchMode="false"
         android:hint="Edit Start Alert"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintBottom_toBottomOf="@id/editCourseStart"
@@ -143,7 +145,7 @@
         android:hint="Edit Mentor Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
+        android:selectAllOnFocus="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorName"
         app:layout_constraintTop_toBottomOf="@id/editCourseStatus" />
@@ -163,7 +165,7 @@
         android:hint="Edit Mentor Phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
+        android:selectAllOnFocus="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorPhone"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorName" />
@@ -183,7 +185,7 @@
         android:hint="Edit Mentor Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
+        android:selectAllOnFocus="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintLeft_toRightOf="@+id/courseMentorEmail"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorPhone" />
@@ -201,9 +203,9 @@
     <EditText
         android:id="@+id/editCourseNotes"
         android:hint="Edit Notes"
+        android:selectAllOnFocus="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
         app:layout_constraintLeft_toRightOf="@+id/courseNotes"
         app:layout_constraintTop_toBottomOf="@id/editCourseMentorEmail"
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
@@ -215,7 +217,9 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:text="Save"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseNotes"
+        app:layout_constraintBottom_toTopOf="@id/course_assessments"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/courseNotes"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -225,28 +229,33 @@
         android:background="#FF5722"
         android:text="Delete"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseNotes"
+        app:layout_constraintTop_toBottomOf="@+id/courseNotes"
+        app:layout_constraintBottom_toTopOf="@id/course_assessments"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/course_assessments"
         android:layout_width="match_parent"
-        android:layout_height="26dp"
+        android:layout_height="28dp"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:text="Course's Assessments:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/associated_assessments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_save"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="78dp" />
+        tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/associated_assessments"
         android:layout_width="411dp"
-        android:layout_height="216dp"
+        android:layout_height="220dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/course_assessments"
         tools:ignore="MissingConstraints"
         tools:listitem="@layout/course_list_item" />
