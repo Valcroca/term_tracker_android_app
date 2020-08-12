@@ -171,7 +171,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (passesValidations()) {
+                 if (passesValidations()) {
                     String name = mEditAssessmentName.getText().toString();
                     String status = mEditAssessmentStatus.getSelectedItem().toString();
                     String start = mEditAssessmentStartDate.getText().toString();
@@ -209,16 +209,16 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
         if (name == null || name.isEmpty()) {
             errorMessage += "Name cannot be empty.\n";
         }
-        if (start == null) {
+        if (start == null || start.isEmpty()) {
             errorMessage += "Start date cannot be empty.\n";
         }
-        if (alertStart == null) {
+        if (alertStart == null || alertStart.isEmpty()) {
             errorMessage += "Alert for Start cannot be empty.\n";
         }
-        if (end == null) {
+        if (end == null || end.isEmpty()) {
             errorMessage += "Due date cannot be empty.\n";
         }
-        if (alertEnd == null) {
+        if (alertEnd == null || alertEnd.isEmpty()) {
             errorMessage += "Alert for Due date cannot be empty.\n";
         }
         if (status == null || status.isEmpty()) {

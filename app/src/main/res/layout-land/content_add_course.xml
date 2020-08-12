@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AddCourseActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="@layout/activity_add_course"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="10dp"
+            android:text="Course Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@id/editCourseName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="204dp" />
+
+        <EditText
+            android:id="@+id/editCourseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="80dp"
+            android:focusable="true"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/courseStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Start Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseStart"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/editCourseStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusableInTouchMode="false"
+            android:hint="Edit Start Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintLeft_toRightOf="@+id/courseStart"
+            app:layout_constraintTop_toBottomOf="@id/editCourseName" />
+
+        <TextView
+            android:id="@+id/startAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Start Alert"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@id/courseStart"
+            app:layout_constraintLeft_toRightOf="@+id/editCourseStart"
+            app:layout_constraintTop_toTopOf="@id/courseStart" />
+
+        <EditText
+            android:focusable="false"
+            android:selectAllOnFocus="true"
+            android:textIsSelectable="true"
+            android:id="@+id/editStartAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Edit Start Alert"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@id/editCourseStart"
+            app:layout_constraintLeft_toRightOf="@id/startAlert" />
+
+        <TextView
+            android:id="@+id/courseEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="End Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseEnd"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp" />
+
+        <EditText
+            android:id="@+id/editCourseEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusableInTouchMode="false"
+            android:hint="Edit End Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintLeft_toRightOf="@+id/courseEnd"
+            app:layout_constraintTop_toBottomOf="@id/editCourseStart" />
+
+        <TextView
+            android:id="@+id/endAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="End Alert"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/courseEnd"
+            app:layout_constraintLeft_toRightOf="@id/editCourseEnd"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/editEndAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusableInTouchMode="false"
+            android:hint="Edit End Alert"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@id/editCourseEnd"
+            app:layout_constraintLeft_toRightOf="@+id/endAlert" />
+
+        <TextView
+            android:id="@+id/courseStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseStatus"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp" />
+
+        <Spinner
+            android:id="@+id/editCourseStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseStatus"
+            app:layout_constraintTop_toBottomOf="@id/editCourseEnd" />
+
+        <TextView
+            android:id="@+id/courseMentorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Mentor Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorName"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp" />
+
+        <EditText
+            android:id="@+id/editCourseMentorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Mentor Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseMentorName"
+            app:layout_constraintTop_toBottomOf="@id/editCourseStatus" />
+
+        <TextView
+            android:id="@+id/courseMentorPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Mentor Phone"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorPhone"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp" />
+
+        <EditText
+            android:id="@+id/editCourseMentorPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Mentor Phone"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseMentorPhone"
+            app:layout_constraintTop_toBottomOf="@id/editCourseMentorName" />
+
+        <TextView
+            android:id="@+id/courseMentorEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Mentor Email"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseMentorEmail"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+        <EditText
+            android:id="@+id/editCourseMentorEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Mentor Email"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseMentorEmail"
+            app:layout_constraintTop_toBottomOf="@id/editCourseMentorPhone" />
+
+        <TextView
+            android:id="@+id/courseNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Notes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            app:layout_constraintBottom_toBottomOf="@+id/editCourseNotes"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="78dp" />
+
+        <EditText
+            android:id="@+id/editCourseNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:selectAllOnFocus="true"
+            android:hint="Edit Notes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textIsSelectable="true"
+            app:layout_constraintLeft_toRightOf="@+id/courseNotes"
+            app:layout_constraintTop_toBottomOf="@id/editCourseMentorEmail" />
+
+        <Button
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:text="Save"
+            app:layout_constraintTop_toBottomOf="@+id/editCourseNotes"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

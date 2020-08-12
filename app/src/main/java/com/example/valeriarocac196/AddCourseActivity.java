@@ -244,16 +244,16 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
         if (name == null || name.isEmpty()) {
             errorMessage += "Name cannot be empty.\n";
         }
-        if (start == null) {
+        if (start == null || start.isEmpty()) {
             errorMessage += "Start date cannot be empty.\n";
         }
-        if (alertStart == null) {
+        if (alertStart == null || alertStart.isEmpty()) {
             errorMessage += "Alert for Start cannot be empty.\n";
         }
-        if (end == null) {
+        if (end == null || end.isEmpty()) {
             errorMessage += "End date cannot be empty.\n";
         }
-        if (alertEnd == null) {
+        if (alertEnd == null || alertEnd.isEmpty()) {
             errorMessage += "Alert for End cannot be empty.\n";
         }
         if (status == null || status.isEmpty()) {
