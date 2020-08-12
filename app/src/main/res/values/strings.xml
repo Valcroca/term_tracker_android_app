@@ -11,4 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_term_list">TermListActivity</string>
     <string name="mm_dd_yyyy_mm_dd_yyyy">mm/dd/yyyy - mm/dd/yyyy</string>
+
+    <string name="channel_name">notification channel</string>
+    <string name="channel_description">notification channel description</string>
 </resources>

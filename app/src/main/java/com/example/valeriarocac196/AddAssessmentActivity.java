@@ -1,6 +1,9 @@
 package com.example.valeriarocac196;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +49,8 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
     private EditText mEditAssessmentAlertStartDate;
     private int position;
     TrackerManagementDatabase db;
+    long date;
+    long mills;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,6 +101,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditAssessmentDueDate, calendar);
+            mills = calendar.getTimeInMillis();
         };
         mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
         mEditAssessmentAlertDueDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -142,6 +148,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditAssessmentStartDate, calendar);
+            mills = calendar.getTimeInMillis();
         };
         mEditAssessmentAlertStartDate = findViewById(R.id.editAssessmentAlertStartDate);
         mEditAssessmentAlertStartDate.setOnClickListener(v -> new DatePickerDialog(AddAssessmentActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -185,6 +192,24 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                     AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                     mAssessmentViewModel.insertAssessment(tempAssessment);
                     mAssessmentViewModel.getAllAssessments();
+                    //alerts
+                     if (!alertStart.isEmpty()) {
+                         Intent intentAssessmentStart=new Intent(AddAssessmentActivity.this, MyReceiver.class);
+                         intentAssessmentStart.putExtra("key","Alert: Assessment "+name+" Starts on "+start+"!");
+                         PendingIntent sender= PendingIntent.getBroadcast(AddAssessmentActivity.this,0,intentAssessmentStart,0);
+                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                         date=mills;
+                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                     }
+                     if (!alertDue.isEmpty()) {
+                         Intent intentAssessmentEnd=new Intent(AddAssessmentActivity.this, MyReceiver.class);
+                         intentAssessmentEnd.putExtra("key","Alert: Assessment "+name+" Due date is "+due+"!");
+                         PendingIntent sender= PendingIntent.getBroadcast(AddAssessmentActivity.this,0,intentAssessmentEnd,0);
+                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                         date=mills;
+                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                     }
+
                     finish();
                 }
             }

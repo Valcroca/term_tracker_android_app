@@ -1,6 +1,9 @@
 package com.example.valeriarocac196;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -55,6 +58,8 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
 
     private int position;
     TrackerManagementDatabase db;
+    long date;
+    long mills;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,6 +138,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditCourseStartAlert, calendar);
+            mills = calendar.getTimeInMillis();
         };
         mEditCourseStartAlert = findViewById(R.id.editStartAlert);
         mEditCourseStartAlert.setOnClickListener(v -> new DatePickerDialog(AddCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -156,6 +162,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditCourseEndAlert, calendar);
+            mills = calendar.getTimeInMillis();
         };
         mEditCourseEndAlert = findViewById(R.id.editEndAlert);
         mEditCourseEndAlert.setOnClickListener(v -> new DatePickerDialog(AddCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -214,6 +221,23 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
                     CourseEntity tempCourse = new CourseEntity(mCourseViewModel.lastID() + 1, courseTermId, name, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(end), DateConverter.toDate(alertEnd), status, mentorName, mentorPhone, mentorEmail, notes);
                     mCourseViewModel.insertCourse(tempCourse);
                     mCourseViewModel.getAllCourses();
+                    //alerts
+                    if (!alertStart.isEmpty()) {
+                        Intent intentCourseStart=new Intent(AddCourseActivity.this, MyReceiver.class);
+                        intentCourseStart.putExtra("key","Alert: Course "+name+" Starts on "+start+"!");
+                        PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseStart,0);
+                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        date=mills;
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                    }
+                    if (!alertEnd.isEmpty()) {
+                        Intent intentCourseEnd=new Intent(AddCourseActivity.this, MyReceiver.class);
+                        intentCourseEnd.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
+                        PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseEnd,0);
+                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        date=mills;
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                    }
 
                     Toast.makeText(getApplicationContext(), "Course " + name + " Added!", Toast.LENGTH_LONG).show();
                     finish();
