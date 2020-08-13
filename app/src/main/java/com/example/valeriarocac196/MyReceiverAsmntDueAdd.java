@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 
-public class MyReceiver extends BroadcastReceiver {
+public class MyReceiverAsmntDueAdd extends BroadcastReceiver {
     static int notificationID;
     String channel_id="test";
     @Override

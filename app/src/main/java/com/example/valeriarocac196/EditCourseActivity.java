@@ -65,7 +65,9 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
     private int position;
     List<AssessmentEntity> filteredAssessments = new ArrayList<>();
     long date;
-    long mills;
+    long date2;
+    long millsStart;
+    long millsEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,7 +177,6 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditCourseStartAlert, calendar);
-            mills = calendar.getTimeInMillis();
         };
         mEditCourseStartAlert = findViewById(R.id.editStartAlert);
         mEditCourseStartAlert.setOnClickListener(v -> new DatePickerDialog(EditCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -192,6 +193,7 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         courseStartAlertDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseStartAlert.setText(aDate);
+            millsStart = calendar.getTimeInMillis();
         };
         // Course DatePickerDialog end alert date listener and functionality
         DatePickerDialog.OnDateSetListener endAlert = (view, year, month, dayOfMonth) -> {
@@ -199,7 +201,6 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditCourseEndAlert, calendar);
-            mills = calendar.getTimeInMillis();
         };
         mEditCourseEndAlert = findViewById(R.id.editEndAlert);
         mEditCourseEndAlert.setOnClickListener(v -> new DatePickerDialog(EditCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -216,6 +217,7 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         courseEndAlertDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseEndAlert.setText(aDate);
+            millsEnd = calendar.getTimeInMillis();
         };
 
         //add assessment button
@@ -292,20 +294,20 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                     mCourseViewModel.updateCourse(updatedCourse);
                     //alerts
                     if (!alertStart.isEmpty()) {
-                        Intent intent=new Intent(EditCourseActivity.this, MyReceiver.class);
+                        Intent intent=new Intent(EditCourseActivity.this, MyReceiverStart.class);
                         intent.putExtra("key","Alert: Course "+name+" Starts on "+start+"!");
                         PendingIntent sender= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent,0);
                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                        date=mills;
+                        date=millsStart;
                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
                     }
                     if (!alertEnd.isEmpty()) {
-                        Intent intent=new Intent(EditCourseActivity.this, MyReceiver.class);
-                        intent.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
-                        PendingIntent sender= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent,0);
-                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                        date=mills;
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                        Intent intent2=new Intent(EditCourseActivity.this, MyReceiverEnd.class);
+                        intent2.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
+                        PendingIntent sender2= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent2,0);
+                        AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        date2=millsEnd;
+                        alarmManager2.set(AlarmManager.RTC_WAKEUP, date2, sender2);
                     }
 
                     setResult(RESULT_OK, replyIntent);

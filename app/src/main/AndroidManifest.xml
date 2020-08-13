@@ -10,38 +10,70 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <receiver
-            android:name=".MyReceiver"
+            android:name=".MyReceiverAsmntDueAdd"
             android:enabled="true"
             android:exported="true"></receiver>
+        <receiver
+            android:name=".MyReceiverAsmntStartAdd"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverEndAdd"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverStartAdd"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverAsmntDue"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverAsmntStart"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverEnd"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".MyReceiverStart"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="NOTIFICATION_SERVICE" />
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".TermActivity"
             android:label="List Of Terms"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditTermActivity"
             android:label="Term Info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddTermActivity"
             android:label="New Term"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddCourseActivity"
             android:label="New Course"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddAssessmentActivity"
             android:label="New Assessment"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditCourseActivity"
             android:label="Course Info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditAssessmentActivity"
             android:label="Assessment Info"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CurrentTermActivity"
             android:label="@string/title_activity_current_term"

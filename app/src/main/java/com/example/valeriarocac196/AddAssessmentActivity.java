@@ -194,7 +194,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                     mAssessmentViewModel.getAllAssessments();
                     //alerts
                      if (!alertStart.isEmpty()) {
-                         Intent intentAssessmentStart=new Intent(AddAssessmentActivity.this, MyReceiver.class);
+                         Intent intentAssessmentStart=new Intent(AddAssessmentActivity.this, MyReceiverAsmntStartAdd.class);
                          intentAssessmentStart.putExtra("key","Alert: Assessment "+name+" Starts on "+start+"!");
                          PendingIntent sender= PendingIntent.getBroadcast(AddAssessmentActivity.this,0,intentAssessmentStart,0);
                          AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -202,7 +202,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                          alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
                      }
                      if (!alertDue.isEmpty()) {
-                         Intent intentAssessmentEnd=new Intent(AddAssessmentActivity.this, MyReceiver.class);
+                         Intent intentAssessmentEnd=new Intent(AddAssessmentActivity.this, MyReceiverAsmntDueAdd.class);
                          intentAssessmentEnd.putExtra("key","Alert: Assessment "+name+" Due date is "+due+"!");
                          PendingIntent sender= PendingIntent.getBroadcast(AddAssessmentActivity.this,0,intentAssessmentEnd,0);
                          AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);

@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Entities.AssessmentEntity;
-import com.example.valeriarocac196.Entities.CourseEntity;
 import com.example.valeriarocac196.ViewModel.AssessmentViewModel;
 
 import java.text.SimpleDateFormat;
@@ -224,10 +223,10 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
                         AssessmentEntity updatedAssessment = new AssessmentEntity(id, courseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                         mAssessmentViewModel.updateAssessment(updatedAssessment);
                     }
-                    //todo first alarm is sent, but not second. also test for setting alarms for courses AND assessments.
+                    //only doing alerts if it's saved...
                     //alerts
                     if (!alertStart.isEmpty()) {
-                        Intent intentAssessment=new Intent(EditAssessmentActivity.this, MyReceiver.class);
+                        Intent intentAssessment=new Intent(EditAssessmentActivity.this, MyReceiverAsmntStart.class);
                         intentAssessment.putExtra("key","Alert: Assessment "+name+" Starts on "+start+"!");
                         PendingIntent sender= PendingIntent.getBroadcast(EditAssessmentActivity.this,0,intentAssessment,0);
                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -235,12 +234,12 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
                     }
                     if (!alertDue.isEmpty()) {
-                        Intent intentAssessment2=new Intent(EditAssessmentActivity.this, MyReceiver.class);
+                        Intent intentAssessment2=new Intent(EditAssessmentActivity.this, MyReceiverAsmntDue.class);
                         intentAssessment2.putExtra("key","Alert: Assessment "+name+" Due date is "+due+"!");
-                        PendingIntent sender= PendingIntent.getBroadcast(EditAssessmentActivity.this,0,intentAssessment2,0);
-                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        PendingIntent sender2= PendingIntent.getBroadcast(EditAssessmentActivity.this,01,intentAssessment2,0);
+                        AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         date=mills;
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                        alarmManager2.set(AlarmManager.RTC_WAKEUP, date, sender2);
                     }
                     setResult(RESULT_OK, replyIntent);
                     finish();

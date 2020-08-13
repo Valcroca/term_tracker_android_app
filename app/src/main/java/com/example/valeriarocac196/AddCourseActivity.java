@@ -31,7 +31,6 @@ import com.example.valeriarocac196.ViewModel.CourseViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class AddCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -223,7 +222,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
                     mCourseViewModel.getAllCourses();
                     //alerts
                     if (!alertStart.isEmpty()) {
-                        Intent intentCourseStart=new Intent(AddCourseActivity.this, MyReceiver.class);
+                        Intent intentCourseStart=new Intent(AddCourseActivity.this, MyReceiverStartAdd.class);
                         intentCourseStart.putExtra("key","Alert: Course "+name+" Starts on "+start+"!");
                         PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseStart,0);
                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
@@ -231,7 +230,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
                     }
                     if (!alertEnd.isEmpty()) {
-                        Intent intentCourseEnd=new Intent(AddCourseActivity.this, MyReceiver.class);
+                        Intent intentCourseEnd=new Intent(AddCourseActivity.this, MyReceiverEndAdd.class);
                         intentCourseEnd.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
                         PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseEnd,0);
                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
