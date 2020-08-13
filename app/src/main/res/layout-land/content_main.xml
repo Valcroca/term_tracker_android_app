@@ -16,7 +16,7 @@
         android:layout_marginBottom="60dp"
         android:text="Schedule/View Terms"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/progressScheduleButton"
+        app:layout_constraintBottom_toTopOf="@+id/progressTrackerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/progressScheduleButton"
+        android:id="@+id/progressTrackerButton"
         android:layout_width="222dp"
         android:layout_height="105dp"
         android:layout_marginStart="139dp"

@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".TrackerActivity"
+            android:label="@string/title_activity_tracker"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <receiver
             android:name=".MyReceiverAsmntDueAdd"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".MyReceiverAsmntStartAdd"
             android:enabled="true"

@@ -21,9 +21,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, TermActivity.class);
             startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
-
-
-
+        Button trackerBtn = findViewById(R.id.progressTrackerButton);
+        trackerBtn.setOnClickListener((view) -> {
+            Intent intent2 = new Intent(MainActivity.this, TrackerActivity.class);
+            startActivityForResult(intent2, NEW_WORD_ACTIVITY_REQUEST_CODE);
+        });
     }
 
     @Override
