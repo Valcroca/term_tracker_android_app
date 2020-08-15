@@ -78,9 +78,6 @@ public class EditTermActivity extends AppCompatActivity {
             mEditTermStart.setText(startString);
             String endString = getIntent().getStringExtra("termEnd");
             mEditTermEnd.setText(endString);
-//            //dates to abbreviated format
-//            termStart = DateConverter.toDate(startString);
-//            termEnd = DateConverter.toDate(endString);
         }
         // Term DatePickerDialog start date listener and functionality
         DatePickerDialog.OnDateSetListener startDate = (view, year, month, dayOfMonth) -> {

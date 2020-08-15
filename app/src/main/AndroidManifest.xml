@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".TrackerActivity"
-            android:label="@string/title_activity_tracker"
+            android:label="Tracker Activity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <receiver

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.valeriarocac196.Entities.TermEntity;
 import com.example.valeriarocac196.UI.TermAdapter;
+import com.example.valeriarocac196.UI.TrackerTermAdapter;
 import com.example.valeriarocac196.ViewModel.TermViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 
