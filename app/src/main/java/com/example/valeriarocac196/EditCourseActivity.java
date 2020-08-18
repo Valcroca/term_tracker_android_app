@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -27,9 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.valeriarocac196.Database.DateConverter;
 import com.example.valeriarocac196.Entities.AssessmentEntity;
 import com.example.valeriarocac196.Entities.CourseEntity;
-import com.example.valeriarocac196.Entities.TermEntity;
 import com.example.valeriarocac196.UI.AssessmentAdapter;
-import com.example.valeriarocac196.UI.CourseAdapter;
 import com.example.valeriarocac196.ViewModel.AssessmentViewModel;
 import com.example.valeriarocac196.ViewModel.CourseViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -186,6 +183,7 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 DateConverter.updateDateText(mEditCourseStartAlert, calendar);
+                millsStart = calendar.getTimeInMillis();
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
@@ -193,7 +191,6 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         courseStartAlertDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseStartAlert.setText(aDate);
-            millsStart = calendar.getTimeInMillis();
         };
         // Course DatePickerDialog end alert date listener and functionality
         DatePickerDialog.OnDateSetListener endAlert = (view, year, month, dayOfMonth) -> {
@@ -210,6 +207,7 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 DateConverter.updateDateText(mEditCourseEndAlert, calendar);
+                millsEnd = calendar.getTimeInMillis();
             }
         }, calendar
                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar
@@ -217,7 +215,6 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         courseEndAlertDateListener = (view, year, month, dayOfMonth) -> {
             String aDate = month + "/" + dayOfMonth + "/" + year;
             mEditCourseEndAlert.setText(aDate);
-            millsEnd = calendar.getTimeInMillis();
         };
 
         //add assessment button
@@ -293,21 +290,21 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
                     CourseEntity updatedCourse = new CourseEntity(id, termId, name, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(end), DateConverter.toDate(alertEnd), status, mentorName, mentorPhone, mentorEmail, notes);
                     mCourseViewModel.updateCourse(updatedCourse);
                     //alerts
-                    if (!alertStart.isEmpty()) {
-                        Intent intent=new Intent(EditCourseActivity.this, MyReceiverStart.class);
-                        intent.putExtra("key","Alert: Course "+name+" Starts on "+start+"!");
-                        PendingIntent sender= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent,0);
-                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                        date=millsStart;
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
-                    }
                     if (!alertEnd.isEmpty()) {
                         Intent intent2=new Intent(EditCourseActivity.this, MyReceiverEnd.class);
-                        intent2.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
+                        intent2.putExtra("key","Alert: Course "+name+" ENDS on "+end+"!");
                         PendingIntent sender2= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent2,0);
                         AlarmManager alarmManager2=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         date2=millsEnd;
                         alarmManager2.set(AlarmManager.RTC_WAKEUP, date2, sender2);
+                    }
+                    if (!alertStart.isEmpty()) {
+                        Intent intent=new Intent(EditCourseActivity.this, MyReceiverStart.class);
+                        intent.putExtra("key","Alert: Course "+name+" STARTS on "+start+"!");
+                        PendingIntent sender= PendingIntent.getBroadcast(EditCourseActivity.this,0,intent,0);
+                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        date=millsStart;
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
                     }
 
                     setResult(RESULT_OK, replyIntent);
@@ -430,7 +427,7 @@ public class EditCourseActivity extends AppCompatActivity implements AdapterView
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK) {
 
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("courseId",0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), DateConverter.toDate(data.getStringExtra("startDate")),  DateConverter.toDate(data.getStringExtra("alertStartDate")), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDueDate")));
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID()+1, getIntent().getIntExtra("courseId",0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), data.getStringExtra("assessmentType"), DateConverter.toDate(data.getStringExtra("startDate")),  DateConverter.toDate(data.getStringExtra("alertStartDate")), DateConverter.toDate(data.getStringExtra("dueDate")),  DateConverter.toDate(data.getStringExtra("alertDueDate")));
             mAssessmentViewModel.insertAssessment(assessment);
         }
     }

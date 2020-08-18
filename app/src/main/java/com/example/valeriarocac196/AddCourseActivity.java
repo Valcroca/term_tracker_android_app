@@ -59,6 +59,8 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
     TrackerManagementDatabase db;
     long date;
     long mills;
+    long date2;
+    long mills2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +163,7 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
             calendar.set(Calendar.MONTH, month);
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             DateConverter.updateDateText(mEditCourseEndAlert, calendar);
-            mills = calendar.getTimeInMillis();
+            mills2 = calendar.getTimeInMillis();
         };
         mEditCourseEndAlert = findViewById(R.id.editEndAlert);
         mEditCourseEndAlert.setOnClickListener(v -> new DatePickerDialog(AddCourseActivity.this, new DatePickerDialog.OnDateSetListener() {
@@ -221,18 +223,18 @@ public class AddCourseActivity extends AppCompatActivity implements AdapterView.
                     mCourseViewModel.insertCourse(tempCourse);
                     mCourseViewModel.getAllCourses();
                     //alerts
-                    if (!alertStart.isEmpty()) {
-                        Intent intentCourseStart=new Intent(AddCourseActivity.this, MyReceiverStartAdd.class);
-                        intentCourseStart.putExtra("key","Alert: Course "+name+" Starts on "+start+"!");
-                        PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseStart,0);
-                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                        date=mills;
-                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
-                    }
                     if (!alertEnd.isEmpty()) {
                         Intent intentCourseEnd=new Intent(AddCourseActivity.this, MyReceiverEndAdd.class);
-                        intentCourseEnd.putExtra("key","Alert: Course "+name+" Ends on "+end+"!");
+                        intentCourseEnd.putExtra("key","Alert: Course "+name+" ENDS on "+end+"!");
                         PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseEnd,0);
+                        AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                        date2=mills2;
+                        alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);
+                    }
+                    if (!alertStart.isEmpty()) {
+                        Intent intentCourseStart=new Intent(AddCourseActivity.this, MyReceiverStartAdd.class);
+                        intentCourseStart.putExtra("key","Alert: Course "+name+" STARTS on "+start+"!");
+                        PendingIntent sender= PendingIntent.getBroadcast(AddCourseActivity.this,0,intentCourseStart,0);
                         AlarmManager alarmManager=(AlarmManager)getSystemService(Context.ALARM_SERVICE);
                         date=mills;
                         alarmManager.set(AlarmManager.RTC_WAKEUP, date, sender);

@@ -43,6 +43,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
 
     private EditText mEditAssessmentName;
     private Spinner mEditAssessmentStatus;
+    private Spinner mEditAssessmentType;
     private EditText mEditAssessmentDueDate;
     private EditText mEditAssessmentAlertDueDate;
     private EditText mEditAssessmentStartDate;
@@ -67,6 +68,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
 
         mEditAssessmentName = findViewById(R.id.editAssessmentName);
         mEditAssessmentStatus = findViewById(R.id.editAssessmentStatus);
+        mEditAssessmentType = findViewById(R.id.editAssessmentType);
         mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
         mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
         mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
@@ -181,6 +183,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                  if (passesValidations()) {
                     String name = mEditAssessmentName.getText().toString();
                     String status = mEditAssessmentStatus.getSelectedItem().toString();
+                    String type = mEditAssessmentType.getSelectedItem().toString();
                     String start = mEditAssessmentStartDate.getText().toString();
                     String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                     String due = mEditAssessmentDueDate.getText().toString();
@@ -189,7 +192,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
                     Bundle extras = intent.getExtras();
                     Integer assessmentCourseId = extras.getInt("assessmentCourseId");
 
-                    AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, assessmentCourseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
+                    AssessmentEntity tempAssessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, assessmentCourseId, name, status, type, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                     mAssessmentViewModel.insertAssessment(tempAssessment);
                     mAssessmentViewModel.getAllAssessments();
                     //alerts
@@ -220,6 +223,12 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
         assessmentStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(assessmentStatusAdapter);
         spin.setOnItemSelectedListener(this);
+        // type spinner code
+        Spinner typeSpin = findViewById(R.id.editAssessmentType);
+        ArrayAdapter<String> assessmentTypeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
+        assessmentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpin.setAdapter(assessmentTypeAdapter);
+        typeSpin.setOnItemSelectedListener(this);
     }
     private boolean passesValidations() {
         boolean passes = true;
@@ -260,6 +269,8 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
     }
     //status spinner code
     String[] statuses = { "plan to take", "passed", "failed" };
+    //type spinner
+    String[] types = { "objective", "performance" };
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
     }
@@ -275,7 +286,7 @@ public class AddAssessmentActivity extends AppCompatActivity  implements Adapter
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, getIntent().getIntExtra("assessmentCourseId", 0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), DateConverter.toDate(data.getStringExtra("assessmentStartDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertStartDate")), DateConverter.toDate(data.getStringExtra("assessmentDueDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertDueDate")));
+            AssessmentEntity assessment = new AssessmentEntity(mAssessmentViewModel.lastID() + 1, getIntent().getIntExtra("assessmentCourseId", 0), data.getStringExtra("assessmentName"), data.getStringExtra("assessmentStatus"), data.getStringExtra("assessmentType"), DateConverter.toDate(data.getStringExtra("assessmentStartDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertStartDate")), DateConverter.toDate(data.getStringExtra("assessmentDueDate")), DateConverter.toDate(data.getStringExtra("assessmentAlertDueDate")));
             mAssessmentViewModel.insertAssessment(assessment);
         }
     }

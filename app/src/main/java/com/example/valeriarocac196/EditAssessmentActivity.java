@@ -43,6 +43,7 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
 
     private EditText mEditAssessmentName;
     private Spinner mEditAssessmentStatus;
+    private Spinner mEditAssessmentType;
     private EditText mEditAssessmentDueDate;
     private EditText mEditAssessmentAlertDueDate;
     private EditText mEditAssessmentStartDate;
@@ -66,6 +67,7 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
 
         mEditAssessmentName = findViewById(R.id.editAssessmentName);
         mEditAssessmentStatus = findViewById(R.id.editAssessmentStatus);
+        mEditAssessmentType = findViewById(R.id.editAssessmentType);
         mEditAssessmentDueDate = findViewById(R.id.editAssessmentDueDate);
         mEditAssessmentAlertDueDate = findViewById(R.id.editAssessmentAlertDueDate);
         mEditAssessmentStartDate = findViewById(R.id.editAssessmentStartDate);
@@ -78,13 +80,21 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
         assessmentStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(assessmentStatusAdapter);
         spin.setOnItemSelectedListener(this);
+        // type spinner code
+        Spinner typeSpin = findViewById(R.id.editAssessmentType);
+        ArrayAdapter<String> assessmentTypeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types);
+        assessmentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeSpin.setAdapter(assessmentTypeAdapter);
+        typeSpin.setOnItemSelectedListener(this);
 
         if (getIntent().getStringExtra("assessmentName") != null) {
             //setting assessment data, passed from adapter, on edit fields
             assessmentId[0] = getIntent().getExtras().getInt("assessmentId");
             mEditAssessmentName.setText(getIntent().getStringExtra("assessmentName"));
-            int spinnerPosition = assessmentStatusAdapter.getPosition(getIntent().getStringExtra("courseStatus"));
+            int spinnerPosition = assessmentStatusAdapter.getPosition(getIntent().getStringExtra("assessmentStatus"));
             mEditAssessmentStatus.setSelection(spinnerPosition);
+            int spinnerPosition2 = assessmentTypeAdapter.getPosition(getIntent().getStringExtra("assessmentType"));
+            mEditAssessmentType.setSelection(spinnerPosition2);
             String dueDateString = (String) getIntent().getExtras().get("assessmentDueDate");
             mEditAssessmentDueDate.setText(dueDateString);
             String alertDueDateString = (String) getIntent().getExtras().get("assessmentAlertDueDate");
@@ -208,6 +218,7 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
                     Intent replyIntent = new Intent();
                     String name = mEditAssessmentName.getText().toString();
                     String status = mEditAssessmentStatus.getSelectedItem().toString();
+                    String type = mEditAssessmentType.getSelectedItem().toString();
                     String start = mEditAssessmentStartDate.getText().toString();
                     String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                     String due = mEditAssessmentDueDate.getText().toString();
@@ -220,7 +231,7 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
                     if (getIntent().getStringExtra("assessmentName") != null) {
                         int id = getIntent().getIntExtra("assessmentId", 0);
                         int courseId = getIntent().getIntExtra("assessmentCourseId", 0);
-                        AssessmentEntity updatedAssessment = new AssessmentEntity(id, courseId, name, status, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
+                        AssessmentEntity updatedAssessment = new AssessmentEntity(id, courseId, name, status, type, DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(due), DateConverter.toDate(alertDue));
                         mAssessmentViewModel.updateAssessment(updatedAssessment);
                     }
                     //only doing alerts if it's saved...
@@ -256,12 +267,13 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
                 int assessmentCourseId = getIntent().getExtras().getInt("assessmentCourseId");
                 String name = mEditAssessmentName.getText().toString();
                 String status = mEditAssessmentStatus.getSelectedItem().toString();
+                String type = mEditAssessmentType.getSelectedItem().toString();
                 String start = mEditAssessmentStartDate.getText().toString();
                 String alertStart = mEditAssessmentAlertStartDate.getText().toString();
                 String due = mEditAssessmentDueDate.getText().toString();
                 String alertDue = mEditAssessmentAlertDueDate.getText().toString();
 
-                AssessmentEntity deletingAssessment = new AssessmentEntity(assessmentId[0], assessmentCourseId, name, status, DateConverter.toDate(due), DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(alertDue));
+                AssessmentEntity deletingAssessment = new AssessmentEntity(assessmentId[0], assessmentCourseId, name, status, type, DateConverter.toDate(due), DateConverter.toDate(start), DateConverter.toDate(alertStart), DateConverter.toDate(alertDue));
                 mAssessmentViewModel.deleteAssessment(deletingAssessment);
 
                 Toast.makeText(getApplicationContext(), name + " Was Deleted!", Toast.LENGTH_LONG).show();
@@ -310,6 +322,8 @@ public class EditAssessmentActivity extends AppCompatActivity implements Adapter
     }
     //status spinner code
     String[] statuses = { "plan to take", "passed", "failed" };
+    //type spinner
+    String[] types = { "objective", "performance" };
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
     }
